@@ -5,6 +5,9 @@
   --foreground: #171717;
   --faded: #434343;
   --highlight: #D73A49;
+  --light-faded: #A4A4A4;
+  --primary: #787878;
+  --title: #E3E3E3;
 }
 
 @theme inline {
@@ -12,6 +15,9 @@
   --color-foreground: var(--foreground);
   --color-faded: var(--faded);
   --color-highlight : var(--highlight);
+  --color-light-faded : var(--light-faded);
+  --color-primary : var(--primary);
+  --color-title : var(--title);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,6 +26,9 @@
     --foreground: #ededed;
     --faded: #434343;
     --highlight: #F97583;
+    --light-faded: #A4A4A4;
+    --primary: #787878;
+     --title: #E3E3E3;
   }
 }
 
@@ -27,4 +36,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.writing-mode-vertical-rl {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
