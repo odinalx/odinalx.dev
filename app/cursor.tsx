@@ -42,14 +42,26 @@ export default function Cursor() {
       cursorOutline.classList.remove('cursor-outline-active');
     };
 
+    const handleMouseDown = () => {
+      cursorOutline.classList.add('cursor-outline-press');
+    };
+
+    const handleMouseUp = () => {
+      cursorOutline.classList.remove('cursor-outline-press');
+    };
+
     window.addEventListener('mousemove', handleMove, { passive: true });
     document.addEventListener('mouseover', handleMouseOver, { passive: true });
     document.addEventListener('mouseout', handleMouseOut, { passive: true });
+    document.addEventListener('mousedown', handleMouseDown, { passive: true });
+    document.addEventListener('mouseup', handleMouseUp, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMove);
       document.removeEventListener('mouseover', handleMouseOver as EventListener);
       document.removeEventListener('mouseout', handleMouseOut as EventListener);
+      document.removeEventListener('mousedown', handleMouseDown as EventListener);
+      document.removeEventListener('mouseup', handleMouseUp as EventListener);
     };
   }, []);
 
