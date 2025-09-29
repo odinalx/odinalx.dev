@@ -1,5 +1,6 @@
 import Navbar from './navbar';
 import Footer from './footer';
+import Cursor from './cursor';
 import { Github, Twitter, Linkedin, Instagram, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${inter} antialiased flex flex-col items-center text-primary text-xl leading-7`}
       >
-        {' '}
+        <Cursor />
         <Navbar />
         <div className="fixed bottom-0 left-40 w-10 text-light-faded">
           <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">

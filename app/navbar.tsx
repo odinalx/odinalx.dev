@@ -72,7 +72,7 @@ export default function Navbar() {
         /*        className={`fixed top-0 left-0 right-0 z-50 py-6 transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         }`}*/
-        className={`fixed top-0 left-0 right-0 z-50 py-6`}
+        className={`fixed top-0 left-0 right-0 z-1 py-6`}
       >
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex justify-center">
