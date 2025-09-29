@@ -10,7 +10,6 @@ export default function Cursor() {
     const cursorOutline = outlineRef.current;
     if (!cursorDot || !cursorOutline) return;
 
-    // Add transition class for smooth morphing
     cursorOutline.classList.add('cursor-outline-transition');
 
     const handleMove = (e: MouseEvent) => {
@@ -62,7 +61,7 @@ export default function Cursor() {
       ></div>
       <div
         ref={outlineRef}
-        className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[40px] h-[40px] border-2 border-cursor-outline"
+        className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[40px] h-[40px] border-2 border-cursor-outline cursor-outline"
       ></div>
     </div>
   );

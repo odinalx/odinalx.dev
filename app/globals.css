@@ -62,12 +62,27 @@ a {
 /* Custom cursor utilities */
 .cursor-outline-transition {
   transition: width 180ms ease, height 180ms ease, border-radius 180ms ease,
-    background-color 180ms ease, border-color 350ms ease;
+    background-color 180ms ease, border-color 160ms ease;
+}
+
+.cursor-outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--color-cursor-outline);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 450ms ease, opacity 610ms ease;
 }
 
 .cursor-outline-active {
   width: 50px;
   height: 50px;
-  background-color: var(--color-cursor-outline);
   border-color: transparent;
+}
+
+.cursor-outline-active::before {
+  transform: scale(1);
+  opacity: 1;
 }
