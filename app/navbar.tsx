@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const navItems = [
@@ -14,11 +14,11 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  //const [isVisible, setIsVisible] = useState(true);
+  //const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('');
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -26,14 +26,14 @@ export default function Navbar() {
         setIsVisible(true);
       } else {
         setIsVisible(false);
-      }
+      } 
 
       setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY]);*/
 
   useEffect(() => {
     const observerOptions = {
@@ -55,7 +55,7 @@ export default function Navbar() {
       observerOptions
     );
 
-    const sections = ['about', 'experience', 'work', 'contact'];
+    const sections = ['home', 'about', 'experience', 'work', 'contact'];
     sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -69,18 +69,27 @@ export default function Navbar() {
   return (
     <header>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 py-6 transition-transform duration-300 ${
+        /*        className={`fixed top-0 left-0 right-0 z-50 py-6 transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        }`}*/
+        className={`fixed top-0 left-0 right-0 z-50 py-6`}
       >
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex justify-center">
             <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-md border border-primary rounded-full px-4 py-4">
+              <li>
+                <Link href={'/'}>
+                  <Image src="/logo.svg" alt="Logo" width={24} height={24} />
+                </Link>
+              </li>
               {navItems.map((item) => {
+                const targetId = item.path.includes('#')
+                  ? item.path.split('#')[1]
+                  : '';
                 const isActive =
                   item.path === '/'
                     ? pathname === item.path
-                    : activeSection === item.path.replace('#', '');
+                    : activeSection === targetId;
                 return (
                   <li key={item.name}>
                     <Link
@@ -94,9 +103,6 @@ export default function Navbar() {
                   </li>
                 );
               })}
-              <li className="text-highlight">
-                <Moon size={18} />
-              </li>
             </ul>
           </div>
         </div>
