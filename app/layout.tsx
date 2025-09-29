@@ -28,22 +28,22 @@ export default function RootLayout({
         <div className="fixed bottom-0 left-40 w-10 text-light-faded">
           <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">
             <li className="p-3">
-              <a href="">
+              <a href="" className="hover:text-highlight">
                 <Github size={24} />
               </a>
             </li>
             <li className="p-3">
-              <a href="">
+              <a href="" className="hover:text-highlight">
                 <Linkedin size={24} />
               </a>
             </li>
             <li className="p-3">
-              <a href="">
+              <a href="" className="hover:text-highlight">
                 <Twitter size={24} />
               </a>
             </li>
             <li className="p-3 mb-5">
-              <a href="">
+              <a href="" className="hover:text-highlight">
                 <Instagram size={24} />
               </a>
             </li>

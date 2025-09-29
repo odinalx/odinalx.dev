@@ -36,34 +36,40 @@ export default function Navbar() {
   }, [lastScrollY]);*/
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0,
-    };
+    const sectionIds = ['home', 'about', 'experience', 'work', 'contact'];
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    const handleScroll = () => {
+      const viewportCenter = window.scrollY + window.innerHeight / 2;
+      let closestSectionId = '';
+      let smallestDistance = Number.POSITIVE_INFINITY;
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+        const elementCenter = window.scrollY + rect.top + rect.height / 2;
+        const distanceToCenter = Math.abs(elementCenter - viewportCenter);
+
+        if (distanceToCenter < smallestDistance) {
+          smallestDistance = distanceToCenter;
+          closestSectionId = id;
         }
-      });
+      }
+
+      if (closestSectionId) {
+        setActiveSection(closestSectionId);
+      }
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
 
-    const sections = ['home', 'about', 'experience', 'work', 'contact'];
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   return (
@@ -76,7 +82,7 @@ export default function Navbar() {
       >
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex justify-center">
-            <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-md border border-primary rounded-full px-4 py-4">
+            <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4">
               <li>
                 <Link href={'/'}>
                   <Image src="/logo.svg" alt="Logo" width={24} height={24} />
