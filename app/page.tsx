@@ -1,4 +1,5 @@
 import Experience from './experience';
+import Work from './work';
 import { ArrowUpRight } from 'lucide-react';
 export default function Home() {
   return (
@@ -18,113 +19,97 @@ export default function Home() {
           currently looking for new oppurtunities.
         </p>
       </section>
-      <section id="about" className=" flex flex-col">
-        <div className="flex items-center mb-12">
-          <h3 className="text-title text-6xl font-bold">
-            <span className="text-highlight">&gt;</span>About
-          </h3>
-          <div className="ml-4 h-px bg-faded flex-1"></div>
-        </div>
-        <div className="space-y-3 max-w-3xl mb-48">
-          <p>
-            I’m a developer passionate about crafting accessible, pixel-perfect
-            user interfaces that blend thoughtful design with robust
-            engineering. My favorite work lies at the intersection of design and
-            development, creating experiences that not only look great but are
-            meticulously built for performance and usability.
-          </p>
-          <p>
-            Currently, I’m a Senior Front-End Engineer a Klaviyo, specializing
-            in accessibility. I contribute to the creation and maintenance of UI
-            components that power Klaviyo’s frontend, ensuring our platform
-            meets web accessibility standards and best practices to deliver an
-            inclusive user experience.
-          </p>
-          <p>
-            In my spare time, I’m usually climbing, playing tennis, hanging out
-            with my wife and two cats, or running around Hyrule searching for
-            Korok seedsKorokseeds.
-          </p>
-        </div>
-      </section>
-      <section id="experience" className=" flex flex-col">
-        <div className="flex items-center mb-12">
-          <h3 className="text-title text-6xl font-bold">
-            <span className="text-highlight">&gt;</span>Experience
-          </h3>
-          <div className="ml-4 h-px bg-faded flex-1"></div>
-        </div>
-        <div className="space-y-3 max-w-3xl mb-48">
-          <Experience />
-          <a
-            href="#"
-            className="flex  text-title font-bold hover:text-highlight box-content group w-fit"
-          >
-            View Full Résumé
-            <ArrowUpRight className="ml-1 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0" />
-          </a>
-        </div>
-      </section>
-      <section id="work" className=" flex flex-col">
-        <div className="flex items-center mb-12">
-          <h3 className="text-title text-6xl font-bold">
-            <span className="text-highlight">&gt;</span>Work
-          </h3>
-          <div className="ml-8 h-px bg-faded flex-1"></div>
-        </div>
-        <div className="space-y-3 max-w-3xl mb-48">
-          {' '}
-          <p>
-            I’m a developer passionate about crafting accessible, pixel-perfect
-            user interfaces that blend thoughtful design with robust
-            engineering. My favorite work lies at the intersection of design and
-            development, creating experiences that not only look great but are
-            meticulously built for performance and usability.
-          </p>
-          <p>
-            Currently, I’m a Senior Front-End Engineer a Klaviyo, specializing
-            in accessibility. I contribute to the creation and maintenance of UI
-            components that power Klaviyo’s frontend, ensuring our platform
-            meets web accessibility standards and best practices to deliver an
-            inclusive user experience.
-          </p>
-          <p>
-            In my spare time, I’m usually climbing, playing tennis, hanging out
-            with my wife and two cats, or running around Hyrule searching for
-            Korok seedsKorokseeds.
-          </p>
-        </div>
-      </section>
-      <section id="contact" className=" flex flex-col">
-        <div className="flex items-center mb-12">
-          <h3 className="text-title text-6xl font-bold">
-            <span className="text-highlight">&gt;</span>Contact
-          </h3>
-          <div className="ml-4 h-px bg-faded flex-1"></div>
-        </div>
-        <div className="space-y-3 max-w-3xl mb-48">
-          {' '}
-          <p>
-            I’m a developer passionate about crafting accessible, pixel-perfect
-            user interfaces that blend thoughtful design with robust
-            engineering. My favorite work lies at the intersection of design and
-            development, creating experiences that not only look great but are
-            meticulously built for performance and usability.
-          </p>
-          <p>
-            Currently, I’m a Senior Front-End Engineer a Klaviyo, specializing
-            in accessibility. I contribute to the creation and maintenance of UI
-            components that power Klaviyo’s frontend, ensuring our platform
-            meets web accessibility standards and best practices to deliver an
-            inclusive user experience.
-          </p>
-          <p>
-            In my spare time, I’m usually climbing, playing tennis, hanging out
-            with my wife and two cats, or running around Hyrule searching for
-            Korok seedsKorokseeds.
-          </p>
-        </div>
-      </section>
+      <div className="m-auto max-w-4xl">
+        {' '}
+        <section id="about" className=" flex flex-col">
+          <div className="flex items-center mb-12">
+            <h3 className="text-title text-6xl font-bold">
+              <span className="text-highlight">&gt;</span>About
+            </h3>
+            <div className="ml-4 h-px bg-faded flex-1"></div>
+          </div>
+          <div className="space-y-3  mb-48">
+            <p>
+              I’m a developer passionate about crafting accessible,
+              pixel-perfect user interfaces that blend thoughtful design with
+              robust engineering. My favorite work lies at the intersection of
+              design and development, creating experiences that not only look
+              great but are meticulously built for performance and usability.
+            </p>
+            <p>
+              Currently, I’m a Senior Front-End Engineer a Klaviyo, specializing
+              in accessibility. I contribute to the creation and maintenance of
+              UI components that power Klaviyo’s frontend, ensuring our platform
+              meets web accessibility standards and best practices to deliver an
+              inclusive user experience.
+            </p>
+            <p>
+              In my spare time, I’m usually climbing, playing tennis, hanging
+              out with my wife and two cats, or running around Hyrule searching
+              for Korok seedsKorokseeds.
+            </p>
+          </div>
+        </section>
+        <section id="experience" className=" flex flex-col ">
+          <div className="flex items-center mb-12">
+            <h3 className="text-title text-6xl font-bold">
+              <span className="text-highlight">&gt;</span>Experience
+            </h3>
+            <div className="ml-4 h-px bg-faded flex-1"></div>
+          </div>
+          <div className="space-y-3 mb-48">
+            <Experience />
+            <a
+              href="#"
+              className="flex  text-title font-bold hover:text-highlight box-content group w-fit"
+            >
+              View Full Résumé
+              <ArrowUpRight className="ml-1 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0" />
+            </a>
+          </div>
+        </section>
+        <section id="work" className=" flex flex-col ">
+          <div className="flex items-center mb-12">
+            <h3 className="text-title text-6xl font-bold">
+              <span className="text-highlight">&gt;</span>Work
+            </h3>
+            <div className="ml-8 h-px bg-faded flex-1"></div>
+          </div>
+          <div className="space-y-3 mb-48">
+            <Work />
+          </div>
+        </section>
+        <section id="contact" className=" flex flex-col ">
+          <div className="flex items-center mb-12">
+            <h3 className="text-title text-6xl font-bold">
+              <span className="text-highlight">&gt;</span>Contact
+            </h3>
+            <div className="ml-4 h-px bg-faded flex-1"></div>
+          </div>
+          <div className="space-y-3 mb-48">
+            {' '}
+            <p>
+              I’m a developer passionate about crafting accessible,
+              pixel-perfect user interfaces that blend thoughtful design with
+              robust engineering. My favorite work lies at the intersection of
+              design and development, creating experiences that not only look
+              great but are meticulously built for performance and usability.
+            </p>
+            <p>
+              Currently, I’m a Senior Front-End Engineer a Klaviyo, specializing
+              in accessibility. I contribute to the creation and maintenance of
+              UI components that power Klaviyo’s frontend, ensuring our platform
+              meets web accessibility standards and best practices to deliver an
+              inclusive user experience.
+            </p>
+            <p>
+              In my spare time, I’m usually climbing, playing tennis, hanging
+              out with my wife and two cats, or running around Hyrule searching
+              for Korok seedsKorokseeds.
+            </p>
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

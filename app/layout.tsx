@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter} antialiased flex flex-col items-center text-primary text-xl leading-7`}
+        className={`${inter} antialiased flex flex-col items-center text-primary text-lg leading-7`}
       >
         <Cursor />
         <Navbar />

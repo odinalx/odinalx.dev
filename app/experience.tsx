@@ -49,7 +49,7 @@ function ExperienceItem({ entry }: { entry: ExperienceEntry }) {
         />
       ) : null}
       <div className="flex gap-24">
-        <div className="w-72 flex-none">
+        <div className="w-80 flex-none">
           <h4 className="text-title text-3xl whitespace-nowrap">
             {entry.company}
           </h4>
