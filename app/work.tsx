@@ -63,7 +63,9 @@ export default function Work() {
       {projects.map((project) => (
         <div
           key={project.slug}
-          className={`group relative flex pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${project.href ? 'cursor-pointer' : 'cursor-default'}`}
+          className={`group relative flex pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${
+            project.href ? 'cursor-pointer' : 'cursor-none'
+          }`}
         >
           <div
             className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-white/10 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
