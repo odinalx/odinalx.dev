@@ -9,11 +9,12 @@ export default function Loader({ onLoadComplete }: { onLoadComplete: () => void 
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    const paths = svgRef.current?.querySelectorAll('.logo-path');
-    if (!paths) return;
+    const pathElements = svgRef.current?.querySelectorAll('path.logo-path');
+    const polygonElement = svgRef.current?.querySelector('polygon.logo-path');
+    if (!pathElements) return;
     
-    // Set initial state - prepare for drawing animation
-    gsap.set(paths, {
+    // Set initial state for paths - prepare for drawing animation
+    gsap.set(pathElements, {
       strokeDasharray: function(index, target) {
         const length = (target as SVGPathElement).getTotalLength();
         return `${length} ${length}`;
@@ -23,6 +24,14 @@ export default function Loader({ onLoadComplete }: { onLoadComplete: () => void 
       },
       visibility: 'visible', // Make visible now that strokeDashoffset hides the stroke
     });
+
+    // Keep polygon hidden initially
+    if (polygonElement) {
+      gsap.set(polygonElement, {
+        opacity: 0,
+        visibility: 'visible',
+      });
+    }
 
     // Timeline for logo animation
     const tl = gsap.timeline({
@@ -41,13 +50,22 @@ export default function Loader({ onLoadComplete }: { onLoadComplete: () => void 
     });
 
     // Animate the paths drawing - start immediately with longer duration
-    tl.to(paths, {
+    tl.to(pathElements, {
       strokeDashoffset: 0,
       duration: 1.8,
       ease: 'power2.inOut',
       stagger: 0.15,
       delay: 0,
     });
+
+    // Fade in the polygon at the end
+    if (polygonElement) {
+      tl.to(polygonElement, {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out',
+      }, '-=0.3');
+    }
 
   }, [onLoadComplete]);
 
@@ -88,6 +106,7 @@ export default function Loader({ onLoadComplete }: { onLoadComplete: () => void 
         />
         <polygon
           className="logo-path"
+          fill="#d83949"
           points="14.97 18.3 20.81 18.3 20.82 18.29 14.98 18.29 14.97 18.3"
         />
       </svg>
