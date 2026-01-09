@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { name: 'About', path: '/#about' },
@@ -16,6 +17,7 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   /*  useEffect(() => {
@@ -90,9 +92,10 @@ export default function Navbar() {
 
   return (
     <header ref={navRef}>
-      <nav className={`fixed top-0 left-0 right-0 z-40 py-6`}>
+      <nav className={`fixed top-0 left-0 right-0 z-40 pt-4 pb-2 md:py-6 lg:py-4`}>
         <div className="max-w-5xl mx-auto px-4">
-          <div className="flex justify-center">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex justify-center">
             <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4">
               <li>
                 <Link href={'/'}>
@@ -111,7 +114,65 @@ export default function Navbar() {
                   <li key={item.name}>
                     <Link
                       href={item.path}
-                      className={`text-lg font-bold transition-colors hover:text-primary ${
+                      className={`text-base lg:text-lg font-bold transition-colors hover:text-primary ${
+                        isActive ? 'text-highlight' : 'text-faded'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex justify-between items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-3">
+            <Link href={'/'}>
+              <Image src="/logo.svg" alt="Logo" width={24} height={24} />
+            </Link>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-title p-2 transition-transform duration-300 ease-in-out"
+              aria-label="Toggle menu"
+            >
+              <div className={`transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </div>
+            </button>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          <div 
+            className={`md:hidden absolute top-full left-4 right-4 mt-1 bg-background/95 backdrop-blur-sm border border-primary rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out origin-top ${
+              mobileMenuOpen 
+                ? 'opacity-100 scale-y-100 translate-y-0' 
+                : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'
+            }`}
+          >
+            <ul className="flex flex-col py-1">
+              {navItems.map((item, index) => {
+                const targetId = item.path.includes('#')
+                  ? item.path.split('#')[1]
+                  : '';
+                const isActive =
+                  item.path === '/'
+                    ? pathname === item.path
+                    : activeSection === targetId;
+                return (
+                  <li 
+                    key={item.name}
+                    className={`transition-all duration-300 ease-out ${
+                      mobileMenuOpen 
+                        ? 'opacity-100 translate-x-0' 
+                        : 'opacity-0 -translate-x-4'
+                    }`}
+                    style={{ transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms' }}
+                  >
+                    <Link
+                      href={item.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`block px-6 py-3 text-base font-bold transition-colors hover:bg-white/5 ${
                         isActive ? 'text-highlight' : 'text-faded'
                       }`}
                     >

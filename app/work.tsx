@@ -113,7 +113,7 @@ export default function Work() {
           ref={(el) => {
             projectsRef.current[index] = el;
           }}
-          className={`group relative flex pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${
+          className={`group relative flex flex-col md:flex-row pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${
             project.href ? 'cursor-pointer' : 'cursor-none'
           }`}
         >
@@ -128,28 +128,28 @@ export default function Work() {
               className="absolute -inset-x-4 -inset-y-4 lg:-inset-x-6 z-20 cursor-pointer"
             />
           ) : null}
-          <div className="flex flex-col z-30 justify-between flex-none pointer-events-none mr-16">
+          <div className="flex flex-row md:flex-col z-30 justify-between md:justify-start flex-none pointer-events-none mb-4 md:mb-0 md:mr-8 lg:mr-16">
             <Image
               alt={project.imageAlt}
               src={project.imageSrc}
               width={250}
               height={0}
-              className="h-auto border-2 border-faded rounded-xl mb-4 transition-colors duration-200 ease-out group-hover:border-light-faded"
+              className="h-auto w-32 md:w-48 lg:w-[250px] border-2 border-faded rounded-xl mb-0 md:mb-4 transition-colors duration-200 ease-out group-hover:border-light-faded"
             />
             {project.githubUrl ? (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-fit transition-colors relative z-40 pointer-events-auto hover:text-highlight"
+                className="w-fit md:w-auto transition-colors relative z-40 pointer-events-auto hover:text-highlight ml-4 md:ml-0"
               >
-                <Github />
+                <Github size={20} className="md:w-6 md:h-6" />
               </a>
             ) : null}
           </div>
           <div className="flex flex-col justify-between z-10 flex-1 min-w-0 pointer-events-none">
             <div>
-              <div className="flex text-title text-2xl">
+              <div className="flex text-title text-xl md:text-2xl">
                 {project.href ? (
                   <a
                     href={project.href}
@@ -158,7 +158,7 @@ export default function Work() {
                     <h4 className="group-hover:text-highlight">
                       {project.title}
                     </h4>
-                    <ArrowUpRight className="ml-1 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0 group-hover:text-highlight" />
+                    <ArrowUpRight className="ml-1 w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0 group-hover:text-highlight" />
                   </a>
                 ) : (
                   <h4 className="group-hover:text-highlight">
@@ -166,9 +166,9 @@ export default function Work() {
                   </h4>
                 )}
               </div>
-              <p>{project.description}</p>
+              <p className="text-sm md:text-base">{project.description}</p>
             </div>
-            <ul className="flex space-x-2 mt-4">
+            <ul className="flex flex-wrap gap-2 mt-4">
               {project.techs.map((t) => (
                 <TechBadge key={t.name} name={t.name} iconSrc={t.iconSrc} />
               ))}
@@ -182,10 +182,10 @@ export default function Work() {
 
 function TechBadge({ name, iconSrc }: { name: string; iconSrc: string }) {
   return (
-    <li className="bg-faded text-title font-bold text-sm px-2 py-1 rounded-full flex items-center">
+    <li className="bg-faded text-title font-bold text-xs md:text-sm px-2 py-1 rounded-full flex items-center">
       <span
         aria-hidden="true"
-        className="mr-1 inline-block h-[14px] w-[14px] bg-current [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]"
+        className="mr-1 inline-block h-[12px] w-[12px] md:h-[14px] md:w-[14px] bg-current [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]"
         style={{ maskImage: `url(${iconSrc})` }}
       />
       {name}

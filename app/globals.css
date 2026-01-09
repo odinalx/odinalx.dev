@@ -94,3 +94,69 @@ a {
 .cursor-outline-press {
   --cursor-size-computed: calc(var(--cursor-size-base, 40px) - 10px);
 }
+
+/* ========================================
+   RESPONSIVE MEDIA QUERIES
+   ======================================== */
+
+/* Desktop (1024px and above) - Default styles apply */
+
+/* Tablet (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body {
+    padding: 0 2rem;
+  }
+  
+  /* Adjust font sizes for tablet */
+  .hero-title {
+    font-size: 6rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 4rem !important;
+  }
+  
+  .section-title {
+    font-size: 3.5rem !important;
+  }
+  
+  /* Hide custom cursor on tablet */
+  body {
+    cursor: default;
+  }
+  
+  a {
+    cursor: pointer;
+  }
+}
+
+/* Phone (below 768px) */
+@media (max-width: 767px) {
+  body {
+    padding: 0 1rem;
+    cursor: default;
+  }
+  
+  a {
+    cursor: pointer;
+  }
+  
+  /* Adjust font sizes for phone */
+  .hero-title {
+    font-size: 3rem !important;
+    white-space: normal !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 2rem !important;
+  }
+  
+  .section-title {
+    font-size: 2rem !important;
+  }
+  
+  /* Adjust contact section */
+  #contact a {
+    font-size: 2rem !important;
+  }
+}

@@ -53,18 +53,19 @@ function ExperienceItem({ entry }: { entry: ExperienceEntry }) {
           height={32}
           width={32}
           alt={entry.logoAlt ?? `${entry.company} logo`}
+          className="mb-2 md:mb-0"
         />
       ) : null}
-      <div className="flex gap-24">
-        <div className="w-80 flex-none">
-          <h4 className="text-title text-3xl whitespace-nowrap">
+      <div className="flex flex-col md:flex-row md:gap-8 lg:gap-24">
+        <div className="md:w-60 lg:w-80 flex-none mb-4 md:mb-0">
+          <h4 className="text-title text-xl md:text-2xl lg:text-3xl md:whitespace-nowrap">
             {entry.company}
           </h4>
-          <h5 className="whitespace-nowrap">{entry.role}</h5>
-          <p className="text-faded text-base">{entry.year}</p>
+          <h5 className="text-sm md:text-base md:whitespace-nowrap">{entry.role}</h5>
+          <p className="text-faded text-sm md:text-base">{entry.year}</p>
         </div>
         <div className="flex-1 min-w-0">
-          <p>{entry.description}</p>
+          <p className="text-sm md:text-base">{entry.description}</p>
         </div>
       </div>
     </div>

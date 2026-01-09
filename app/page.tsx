@@ -147,70 +147,91 @@ export default function Home() {
         const divider = sectionRef.current.querySelector('.section-divider');
         const content = sectionRef.current.querySelector('.section-content');
 
-        gsap.from(title, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 50%',
-            toggleActions: 'play none none none',
-          },
-          x: -50,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        });
+        if (title) {
+          gsap.fromTo(
+            title,
+            { x: -50, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: 'top 80%',
+                end: 'top 50%',
+                toggleActions: 'play none none none',
+              },
+            }
+          );
+        }
 
-        gsap.from(divider, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 50%',
-            toggleActions: 'play none none none',
-          },
-          scaleX: 0,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          delay: 0.2,
-        });
+        if (divider) {
+          gsap.fromTo(
+            divider,
+            { scaleX: 0, opacity: 0 },
+            {
+              scaleX: 1,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+              delay: 0.2,
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: 'top 80%',
+                end: 'top 50%',
+                toggleActions: 'play none none none',
+              },
+            }
+          );
+        }
 
         // Only animate content children for About and Contact sections
         // Work and Experience handle their own animations
         const sectionId = sectionRef.current.id;
         if (content && (sectionId === 'about' || sectionId === 'contact')) {
-          gsap.from(content.children, {
-            scrollTrigger: {
-              trigger: content,
-              start: 'top 80%',
-              toggleActions: 'play none none none',
-            },
-            y: 30,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: 'power2.out',
-          });
+          gsap.fromTo(
+            content.children,
+            { y: 30, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.15,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: content,
+                start: 'top 90%',
+                end: 'top 20%',
+                toggleActions: 'play none none none',
+              },
+            }
+          );
         }
       }
     });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (
-    <main className="text-primary min-h-screen max-w-5xl">
+    <main className="text-primary min-h-screen max-w-5xl px-4 md:px-6 lg:px-0">
       <section
         id="home"
         ref={heroRef}
-        className="min-h-screen flex flex-col justify-center "
+        className="min-h-screen flex flex-col justify-center"
       >
         <TypewriterText 
           text="Odin Alexandre"
-          className="hero-title font-bold text-9xl text-title"
+          className="hero-title font-bold text-5xl md:text-7xl lg:text-9xl text-title"
         />
-        <h2 className="hero-subtitle text-light-faded font-semibold text-7xl mb-8">
+        <h2 className="hero-subtitle text-light-faded font-semibold text-3xl md:text-5xl lg:text-7xl mb-6 md:mb-8">
           Full Stack Developer
         </h2>
 
-        <p className="hero-description max-w-xl">
+        <p className="hero-description max-w-xl text-sm md:text-base">
           I <span className="text-highlight font-bold">build</span> accessible
           and engaging ( and sometimes{' '}
           <span className="text-highlight font-bold">designing</span> ){' '}
@@ -222,13 +243,13 @@ export default function Home() {
       <div className="m-auto max-w-3xl">
         {' '}
         <section id="about" ref={aboutSectionRef} className=" flex flex-col">
-          <div className="flex items-center mb-12">
-            <h3 className="section-title text-title text-6xl font-bold">
+          <div className="flex items-center mb-8 md:mb-12">
+            <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>About
             </h3>
-            <div className="section-divider ml-4 h-px bg-faded flex-1"></div>
+            <div className="section-divider ml-2 md:ml-4 h-px bg-faded flex-1"></div>
           </div>
-          <div className="section-content space-y-3  mb-48">
+          <div className="section-content space-y-3 mb-24 md:mb-32 lg:mb-48 text-sm md:text-base">
             <p>
               I&apos;m a developer passionate about crafting accessible,
               pixel-perfect user interfaces that blend thoughtful design with
@@ -251,17 +272,17 @@ export default function Home() {
           </div>
         </section>
         <section id="experience" ref={expSectionRef} className=" flex flex-col ">
-          <div className="flex items-center mb-12">
-            <h3 className="section-title text-title text-6xl font-bold">
+          <div className="flex items-center mb-8 md:mb-12">
+            <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>Experience
             </h3>
-            <div className="section-divider ml-4 h-px bg-faded flex-1"></div>
+            <div className="section-divider ml-2 md:ml-4 h-px bg-faded flex-1"></div>
           </div>
-          <div className="section-content space-y-3 mb-48">
+          <div className="section-content space-y-3 mb-24 md:mb-32 lg:mb-48">
             <Experience />
             <a
               href="#"
-              className="experience-cta flex  text-title font-bold hover:text-highlight box-content group w-fit"
+              className="experience-cta flex text-title font-bold hover:text-highlight box-content group w-fit text-sm md:text-base"
             >
               View Full Résumé
               <ArrowUpRight className="ml-1 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0" />
@@ -269,17 +290,17 @@ export default function Home() {
           </div>
         </section>
         <section id="work" ref={workSectionRef} className=" flex flex-col ">
-          <div className="flex items-center mb-12">
-            <h3 className="section-title text-title text-6xl font-bold">
+          <div className="flex items-center mb-8 md:mb-12">
+            <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>Work
             </h3>
-            <div className="section-divider ml-8 h-px bg-faded flex-1"></div>
+            <div className="section-divider ml-2 md:ml-4 lg:ml-8 h-px bg-faded flex-1"></div>
           </div>
-          <div className="section-content space-y-3 mb-48">
+          <div className="section-content space-y-3 mb-24 md:mb-32 lg:mb-48">
             <Work />
             <a
               href="#"
-              className="work-cta flex  text-title font-bold hover:text-highlight box-content group w-fit"
+              className="work-cta flex text-title font-bold hover:text-highlight box-content group w-fit text-sm md:text-base"
             >
               View All Works
               <ArrowRight className="ml-1 transition-transform duration-200 ease-out translate-y-[2px] -translate-x-[4px] group-hover:translate-x-[2px]" />
@@ -287,19 +308,19 @@ export default function Home() {
           </div>
         </section>
         <section id="contact" ref={contactSectionRef} className=" flex flex-col ">
-          <div className="flex items-center mb-12">
-            <h3 className="section-title text-title text-6xl font-bold">
+          <div className="flex items-center mb-8 md:mb-12">
+            <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>Contact
             </h3>
-            <div className="section-divider ml-4 h-px bg-faded flex-1"></div>
+            <div className="section-divider ml-2 md:ml-4 h-px bg-faded flex-1"></div>
           </div>
-          <div className="section-content space-y-3 mb-32 text-center flex flex-col items-center">
-            <p className="max-w-xl m-auto mb-8">
+          <div className="section-content space-y-3 mb-20 md:mb-32 text-center flex flex-col items-center">
+            <p className="max-w-xl m-auto mb-6 md:mb-8 text-sm md:text-base px-4">
               Im currently looking for new opportunities. My inbox is always
               open, whether you have a question or just want to say hi !
             </p>
-            <ArrowDown className="mb-8 text-title" />
-            <a href="" className="font-bold text-5xl text-title">
+            <ArrowDown className="mb-6 md:mb-8 text-title w-5 h-5 md:w-6 md:h-6" />
+            <a href="" className="font-bold text-2xl md:text-4xl lg:text-5xl text-title px-4">
               GET IN <FlipWord className="text-highlight">TOUCH</FlipWord>
             </a>
           </div>

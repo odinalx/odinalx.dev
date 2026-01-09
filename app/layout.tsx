@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased flex flex-col items-center text-primary text-lg leading-7`}
+        className={`${inter.className} antialiased flex flex-col items-center text-primary text-base md:text-lg leading-6 md:leading-7`}
       >
         <LoaderWrapper>
           <Cursor />

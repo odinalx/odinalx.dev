@@ -35,10 +35,10 @@ export default function SideBars() {
 
   return (
     <>
-      {/* Left Bar - Social Icons */}
+      {/* Left Bar - Social Icons (Hidden on mobile/tablet) */}
       <div
         ref={leftBarRef}
-        className="fixed bottom-0 left-40 w-10 text-light-faded"
+        className="hidden lg:block fixed bottom-0 left-20 xl:left-40 w-10 text-light-faded"
       >
         <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">
           <li className="p-3">
@@ -64,14 +64,14 @@ export default function SideBars() {
         </ul>
       </div>
 
-      {/* Right Bar - Based in France */}
+      {/* Right Bar - Based in France (Hidden on mobile/tablet) */}
       <div
         ref={rightBarRef}
-        className="fixed bottom-0 right-40 w-10 text-light-faded"
+        className="hidden lg:block fixed bottom-0 right-20 xl:right-40 w-10 text-light-faded"
       >
         <div className="after:w-[1px] after:h-[120px] after:bg-light-faded after:block flex flex-col items-center">
           <MapPin size={24} className="rotate-90 mb-4" />
-          <p className="writing-mode-vertical-rl text-center mb-5 font-bold">
+          <p className="writing-mode-vertical-rl text-center mb-5 font-bold text-sm">
             BASED IN FRANCE
           </p>
         </div>

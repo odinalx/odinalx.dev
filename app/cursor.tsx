@@ -1,11 +1,31 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement | null>(null);
   const outlineRef = useRef<HTMLDivElement | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Check if device supports touch or is mobile/tablet
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.innerWidth < 1024
+      );
+    };
+
+    checkTouchDevice();
+    window.addEventListener('resize', checkTouchDevice);
+
+    return () => window.removeEventListener('resize', checkTouchDevice);
+  }, []);
+
+  useEffect(() => {
+    // Don't initialize cursor on touch devices
+    if (isTouchDevice) return;
+
     const cursorDot = dotRef.current;
     const cursorOutline = outlineRef.current;
     if (!cursorDot || !cursorOutline) return;
@@ -63,10 +83,13 @@ export default function Cursor() {
       document.removeEventListener('mousedown', handleMouseDown as EventListener);
       document.removeEventListener('mouseup', handleMouseUp as EventListener);
     };
-  }, []);
+  }, [isTouchDevice]);
+
+  // Don't render cursor on touch devices
+  if (isTouchDevice) return null;
 
   return (
-    <div className="z-[100]">
+    <div className="z-[100] hidden lg:block">
       <div
         ref={dotRef}
         className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[5px] h-[5px] bg-cursor"
