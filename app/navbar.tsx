@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const navItems = [
   { name: 'About', path: '/#about' },
@@ -14,9 +15,8 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  //const [isVisible, setIsVisible] = useState(true);
-  //const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('');
+  const navRef = useRef<HTMLElement>(null);
 
   /*  useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +34,22 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);*/
+
+  useEffect(() => {
+    // Entrance animation for navbar - starts after loader (2.2s)
+    if (navRef.current) {
+      const nav = navRef.current.querySelector('nav');
+      if (nav) {
+        gsap.from(nav, {
+          y: -100,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: 2.4,
+        });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const sectionIds = ['home', 'about', 'experience', 'work', 'contact'];
@@ -73,13 +89,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header>
-      <nav
-        /*        className={`fixed top-0 left-0 right-0 z-50 py-6 transition-transform duration-300 ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}*/
-        className={`fixed top-0 left-0 right-0 z-40 py-6`}
-      >
+    <header ref={navRef}>
+      <nav className={`fixed top-0 left-0 right-0 z-40 py-6`}>
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex justify-center">
             <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4">

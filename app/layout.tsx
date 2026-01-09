@@ -1,7 +1,8 @@
 import Navbar from './navbar';
 import Footer from './footer';
 import Cursor from './cursor';
-import { Github, Twitter, Linkedin, Instagram, MapPin } from 'lucide-react';
+import SideBars from './sidebars';
+import LoaderWrapper from './loader-wrapper';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -21,44 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter} antialiased flex flex-col items-center text-primary text-lg leading-7`}
+        className={`${inter.className} antialiased flex flex-col items-center text-primary text-lg leading-7`}
       >
-        <Cursor />
-        <Navbar />
-        <div className="fixed bottom-0 left-40 w-10 text-light-faded">
-          <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">
-            <li className="p-3">
-              <a href="" className="hover:text-highlight">
-                <Github size={24} />
-              </a>
-            </li>
-            <li className="p-3">
-              <a href="" className="hover:text-highlight">
-                <Linkedin size={24} />
-              </a>
-            </li>
-            <li className="p-3">
-              <a href="" className="hover:text-highlight">
-                <Twitter size={24} />
-              </a>
-            </li>
-            <li className="p-3 mb-5">
-              <a href="" className="hover:text-highlight">
-                <Instagram size={24} />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="fixed bottom-0 right-40 w-10 text-light-faded">
-          <div className="after:w-[1px] after:h-[120px] after:bg-light-faded after:block flex flex-col items-center">
-            <MapPin size={24} className="rotate-90 mb-4" />
-            <p className="writing-mode-vertical-rl text-center mb-5 font-bold">
-              BASED IN FRANCE
-            </p>
-          </div>
-        </div>
-        {children}
-        <Footer />
+        <LoaderWrapper>
+          <Cursor />
+          <Navbar />
+          <SideBars />
+          {children}
+          <Footer />
+        </LoaderWrapper>
       </body>
     </html>
   );

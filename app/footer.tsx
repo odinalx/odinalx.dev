@@ -1,10 +1,8 @@
-import { Github, Twitter, Linkedin } from 'lucide-react';
-
 export default function Footer() {
   return (
     <footer className="py-6 text-center">
-      <div className="max-w-5xl mx-auto px-4 pb-4">
-        <p className="text-base text-faded max-w-md ">
+      <div className="max-w-5xl mx-auto px-4 pb-4 flex justify-center">
+        <p className="text-base text-faded max-w-md">
           Designed in{' '}
           <a
             href="https://www.figma.com/"

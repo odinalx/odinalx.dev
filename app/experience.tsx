@@ -1,4 +1,11 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type ExperienceEntry = {
   company: string;
@@ -65,10 +72,57 @@ function ExperienceItem({ entry }: { entry: ExperienceEntry }) {
 }
 
 export default function Experience() {
+  const experienceRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    experienceRef.current.forEach((exp, index) => {
+      if (exp) {
+        gsap.from(exp, {
+          scrollTrigger: {
+            trigger: exp,
+            start: 'top 85%',
+            end: 'top 60%',
+            toggleActions: 'play none none none',
+          },
+          x: -50,
+          opacity: 0,
+          duration: 0.8,
+          delay: index * 0.15,
+          ease: 'power3.out',
+        });
+      }
+    });
+
+    // Animate the "View Full Résumé" button
+    const ctaButton = document.querySelector('.experience-cta');
+    if (ctaButton && containerRef.current) {
+      gsap.from(ctaButton, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        delay: experiences.length * 0.15 + 0.3,
+        ease: 'power2.out',
+      });
+    }
+  }, []);
+
   return (
-    <div className="space-y-8 mb-16">
+    <div ref={containerRef} className="space-y-8 mb-16">
       {experiences.map((entry, index) => (
-        <ExperienceItem key={`${entry.company}-${index}`} entry={entry} />
+        <div
+          key={`${entry.company}-${index}`}
+          ref={(el) => {
+            experienceRef.current[index] = el;
+          }}
+        >
+          <ExperienceItem entry={entry} />
+        </div>
       ))}
     </div>
   );

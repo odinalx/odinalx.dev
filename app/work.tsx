@@ -1,5 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 import { Github, ArrowUpRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Project = {
   slug: string;
@@ -58,11 +65,54 @@ const projects: Project[] = [
 ];
 
 export default function Work() {
+  const projectsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    projectsRef.current.forEach((project, index) => {
+      if (project) {
+        gsap.from(project, {
+          scrollTrigger: {
+            trigger: project,
+            start: 'top 85%',
+            end: 'top 60%',
+            toggleActions: 'play none none none',
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          delay: index * 0.1,
+          ease: 'power3.out',
+        });
+      }
+    });
+
+    // Animate the "View All Works" button
+    const ctaButton = document.querySelector('.work-cta');
+    if (ctaButton && containerRef.current) {
+      gsap.from(ctaButton, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        delay: projects.length * 0.1 + 0.3,
+        ease: 'power2.out',
+      });
+    }
+  }, []);
+
   return (
-    <div className="space-y-8 mb-16 group/list">
-      {projects.map((project) => (
+    <div ref={containerRef} className="space-y-8 mb-16 group/list">
+      {projects.map((project, index) => (
         <div
           key={project.slug}
+          ref={(el) => {
+            projectsRef.current[index] = el;
+          }}
           className={`group relative flex pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${
             project.href ? 'cursor-pointer' : 'cursor-none'
           }`}
