@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
         className={`${inter.className} antialiased flex flex-col items-center text-primary text-base md:text-lg leading-6 md:leading-7`}
       >

@@ -40,7 +40,7 @@ function TypewriterText({ text, className }: { text: string; className?: string 
         whiteSpace: 'nowrap',
         position: 'relative',
         display: 'inline-block',
-        cursor: 'pointer',
+        cursor: 'none',
       }}
     >
       <span style={{ visibility: 'hidden' }}>
@@ -86,7 +86,7 @@ function FlipWord({ children, className }: { children: React.ReactNode; classNam
       className={className}
       style={{ 
         display: 'inline-block',
-        cursor: 'pointer',
+        cursor: 'none',
         transformStyle: 'preserve-3d',
       }}
     >

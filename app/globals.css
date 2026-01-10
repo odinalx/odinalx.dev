@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0D0D0D;
+  --foreground: #ededed;
   --faded: #434343;
   --highlight: #D83A49;
   --light-faded: #A4A4A4;
@@ -10,7 +10,6 @@
   --title: #E3E3E3;
   --cursor: white;
   --cursor-outline: hsla(0, 0%, 100%, 0.5);
-
 }
 
 @theme inline {
@@ -23,20 +22,6 @@
   --color-title : var(--title);
   --color-cursor: var(--cursor);
   --color-cursor-outline: var(--cursor-outline);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0D0D0D;
-    --foreground: #ededed;
-    --faded: #434343;
-    --highlight: #D83A49;
-    --light-faded: #A4A4A4;
-    --primary: #787878;
-    --title: #E3E3E3;
-    --cursor: white;
-    --cursor-outline: hsla(0, 0%, 100%, 0.5);
-  }
 }
 
 html {

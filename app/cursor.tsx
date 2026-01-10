@@ -89,14 +89,14 @@ export default function Cursor() {
   if (isTouchDevice) return null;
 
   return (
-    <div className="z-[100] hidden lg:block">
+    <div className="z-[9999] hidden lg:block">
       <div
         ref={dotRef}
-        className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[5px] h-[5px] bg-cursor"
+        className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[5px] h-[5px] bg-cursor z-[9999]"
       ></div>
       <div
         ref={outlineRef}
-        className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[40px] h-[40px] border-2 border-cursor-outline cursor-outline"
+        className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[40px] h-[40px] border-2 border-cursor-outline cursor-outline z-[9999]"
       ></div>
     </div>
   );
