@@ -69,40 +69,67 @@ export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const triggers: ScrollTrigger[] = [];
+
     projectsRef.current.forEach((project, index) => {
       if (project) {
-        gsap.from(project, {
-          scrollTrigger: {
-            trigger: project,
-            start: 'top 85%',
-            end: 'top 60%',
-            toggleActions: 'play none none none',
+        const trigger = gsap.fromTo(
+          project,
+          {
+            y: 50,
+            opacity: 0,
           },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          delay: index * 0.1,
-          ease: 'power3.out',
-        });
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: project,
+              start: 'top 90%',
+              end: 'top 70%',
+              toggleActions: 'play none none none',
+              once: true, // Animation se joue une seule fois
+            },
+          }
+        );
+        if (trigger.scrollTrigger) {
+          triggers.push(trigger.scrollTrigger);
+        }
       }
     });
 
     // Animate the "View All Works" button
     const ctaButton = document.querySelector('.work-cta');
     if (ctaButton && containerRef.current) {
-      gsap.from(ctaButton, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
+      const trigger = gsap.fromTo(
+        ctaButton,
+        {
+          y: 30,
+          opacity: 0,
         },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        delay: projects.length * 0.1 + 0.3,
-        ease: 'power2.out',
-      });
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: ctaButton,
+            start: 'top 95%',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        }
+      );
+      if (trigger.scrollTrigger) {
+        triggers.push(trigger.scrollTrigger);
+      }
     }
+
+    // Cleanup function
+    return () => {
+      triggers.forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (
@@ -116,6 +143,7 @@ export default function Work() {
           className={`group relative flex flex-col md:flex-row pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${
             project.href ? 'cursor-pointer' : 'cursor-none'
           }`}
+          style={{ willChange: 'transform, opacity' }}
         >
           <div
             className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-white/10 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"

@@ -103,11 +103,11 @@ export default function Home() {
   const contactSectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Hero animations - wait for side bars to finish
+    // Hero animations - start after sidebars begin
     // Loader: 2.2s
     // Navbar: 2.4s + 0.8s = finishes at 3.2s
-    // Side bars: 3.35s + 1s = finishes at 4.35s
-    // Start hero at 4.4s
+    // Side bars: 3.25s + 1s = finishes at 4.25s
+    // Start hero at 3.5s (after sidebars start)
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       
@@ -115,7 +115,7 @@ export default function Home() {
         y: 100,
         opacity: 0,
         duration: 1,
-        delay: 4.4,
+        delay: 3.8,
       })
       .from('.hero-subtitle', {
         y: 80,
