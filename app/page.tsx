@@ -244,7 +244,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="text-primary min-h-screen max-w-5xl px-4 md:px-6 lg:px-0">
+    <main className="text-primary min-h-screen max-w-5xl px-4 md:px-6 lg:px-0" id="main-content">
       <section
         id="home"
         ref={heroRef}
@@ -315,9 +315,10 @@ export default function Home() {
             <a
               href="#"
               className="experience-cta flex text-title font-bold hover:text-highlight box-content group w-fit text-sm md:text-base"
+              aria-label="View full résumé (PDF)"
             >
               View Full Résumé
-              <ArrowUpRight className="ml-1 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0" />
+              <ArrowUpRight className="ml-1 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0" aria-hidden="true" />
             </a>
           </div>
         </section>
@@ -333,9 +334,10 @@ export default function Home() {
             <a
               href="/work"
               className="work-cta flex text-title font-bold hover:text-highlight box-content group w-fit text-sm md:text-base"
+              aria-label="View all projects"
             >
               View All Works
-              <ArrowRight className="ml-1 transition-transform duration-200 ease-out translate-y-[2px] -translate-x-[4px] group-hover:translate-x-[2px]" />
+              <ArrowRight className="ml-1 transition-transform duration-200 ease-out translate-y-[2px] -translate-x-[4px] group-hover:translate-x-[2px]" aria-hidden="true" />
             </a>
           </div>
         </section>
@@ -355,10 +357,11 @@ export default function Home() {
               Im currently looking for new opportunities. My inbox is always
               open, whether you have a question or just want to say hi !
             </p>
-            <ArrowDown className="mb-6 md:mb-8 text-title w-5 h-5 md:w-6 md:h-6" />
+            <ArrowDown className="mb-6 md:mb-8 text-title w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
             <a
               href="mailto:odinaledxandre.dev@gmail.com"
               className="font-bold text-2xl md:text-4xl lg:text-5xl text-title px-4"
+              aria-label="Send email to odinaledxandre.dev@gmail.com"
               onMouseEnter={() => {
                 flipWordRef.current?.triggerAnimation();
               }}

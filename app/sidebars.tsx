@@ -48,25 +48,25 @@ export default function SideBars() {
         ref={leftBarRef}
         className="hidden lg:block fixed bottom-0 left-20 xl:left-40 w-10 text-light-faded"
       >
-        <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">
+        <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block " role="navigation" aria-label="Social media links">
           <li className="p-3">
-            <a href="https://github.com/odinalx" target="_blank" rel="noreferrer" className="hover:text-highlight">
-              <Github size={24} />
+            <a href="https://github.com/odinalx" target="_blank" rel="noreferrer" className="hover:text-highlight" aria-label="GitHub profile">
+              <Github size={24} aria-hidden="true" />
             </a>
           </li>
           <li className="p-3">
-            <a href="https://www.linkedin.com/in/odinalexandre/" target="_blank" rel="noreferrer" className="hover:text-highlight">
-              <Linkedin size={24} />
+            <a href="https://www.linkedin.com/in/odinalexandre/" target="_blank" rel="noreferrer" className="hover:text-highlight" aria-label="LinkedIn profile">
+              <Linkedin size={24} aria-hidden="true" />
             </a>
           </li>
           <li className="p-3">
-            <a href="https://x.com/_Odin_Dev" target="_blank" rel="noreferrer" className="hover:text-highlight">
-              <Twitter size={24} />
+            <a href="https://x.com/_Odin_Dev" target="_blank" rel="noreferrer" className="hover:text-highlight" aria-label="Twitter profile">
+              <Twitter size={24} aria-hidden="true" />
             </a>
           </li>
           <li className="p-3 mb-5">
-            <a href="https://www.instagram.com/_odin_dev/" target="_blank" rel="noreferrer" className="hover:text-highlight">
-              <Instagram size={24} />
+            <a href="https://www.instagram.com/_odin_dev/" target="_blank" rel="noreferrer" className="hover:text-highlight" aria-label="Instagram profile">
+              <Instagram size={24} aria-hidden="true" />
             </a>
           </li>
         </ul>
@@ -76,9 +76,10 @@ export default function SideBars() {
       <div
         ref={rightBarRef}
         className="hidden lg:block fixed bottom-0 right-20 xl:right-40 w-10 text-light-faded"
+        aria-label="Location information"
       >
         <div className="after:w-[1px] after:h-[120px] after:bg-light-faded after:block flex flex-col items-center">
-          <MapPin size={24} className="rotate-90 mb-4" />
+          <MapPin size={24} className="rotate-90 mb-4" aria-hidden="true" />
           <p className="writing-mode-vertical-rl text-center mb-5 font-bold text-sm">
             BASED IN FRANCE
           </p>

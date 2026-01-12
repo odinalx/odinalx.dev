@@ -148,8 +148,9 @@ export default function Work() {
           style={{ willChange: 'transform, opacity' }}
         >
           <div
-            className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-white/10 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+            className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-white/10 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg pointer-events-none"
             aria-hidden="true"
+            role="presentation"
           ></div>
           {project.href ? (
             <a
@@ -173,8 +174,9 @@ export default function Work() {
                 target="_blank"
                 rel="noreferrer"
                 className="w-fit md:w-auto transition-colors relative z-40 pointer-events-auto hover:text-highlight ml-4 md:ml-0"
+                aria-label={`View ${project.title} on GitHub`}
               >
-                <Github size={20} className="md:w-6 md:h-6" />
+                <Github size={20} className="md:w-6 md:h-6" aria-hidden="true" />
               </a>
             ) : null}
           </div>
@@ -190,7 +192,7 @@ export default function Work() {
                     <h4 className="group-hover:text-highlight">
                       {project.title}
                     </h4>
-                    <ArrowUpRight className="ml-1 w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0 group-hover:text-highlight" />
+                    <ArrowUpRight className="ml-1 w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 ease-out translate-y-[4px] -translate-x-[4px] group-hover:-translate-y-0 group-hover:translate-x-0 group-hover:text-highlight" aria-hidden="true" />
                   </a>
                 ) : (
                   <h4 className="group-hover:text-highlight">

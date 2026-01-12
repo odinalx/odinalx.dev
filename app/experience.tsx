@@ -61,10 +61,10 @@ function ExperienceItem({ entry }: { entry: ExperienceEntry }) {
           <h4 className="text-title text-xl md:text-2xl lg:text-3xl md:whitespace-nowrap">
             {entry.company}
           </h4>
-          <h5 className="text-sm md:text-base md:whitespace-nowrap">
+          <h5 className="text-primary text-sm md:text-base md:whitespace-nowrap">
             {entry.role}
           </h5>
-          <p className="text-faded text-sm md:text-base">{entry.year}</p>
+          <p className="text-primary text-sm md:text-base">{entry.year}</p>
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm md:text-base">{entry.description}</p>

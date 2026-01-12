@@ -103,10 +103,10 @@ export default function Navbar() {
         <div className="max-w-5xl mx-auto px-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex justify-center">
-            <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4">
+            <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4" role="navigation" aria-label="Main navigation">
               <li>
-                <Link href={'/'}>
-                  <Image src="/logo.svg" alt="Logo" width={24} height={24} />
+                <Link href={'/'} aria-label="Home">
+                  <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} />
                 </Link>
               </li>
               {navItems.map((item) => {
@@ -121,8 +121,8 @@ export default function Navbar() {
                   <li key={item.name}>
                     <Link
                       href={item.path}
-                      className={`text-base lg:text-lg font-bold transition-colors hover:text-primary ${
-                        isActive ? 'text-highlight' : 'text-faded'
+                      className={`text-base lg:text-lg font-bold transition-colors hover:text-title ${
+                        isActive ? 'text-highlight' : 'text-primary'
                       }`}
                     >
                       {item.name}
@@ -135,8 +135,8 @@ export default function Navbar() {
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex justify-between items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-3">
-            <Link href={'/'}>
-              <Image src="/logo.svg" alt="Logo" width={24} height={24} />
+            <Link href={'/'} aria-label="Home">
+              <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -160,6 +160,8 @@ export default function Navbar() {
                 ? 'opacity-100 scale-y-100 translate-y-0'
                 : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'
             }`}
+            role="navigation"
+            aria-label="Mobile navigation menu"
           >
             <ul className="flex flex-col py-1">
               {navItems.map((item, index) => {
@@ -188,7 +190,7 @@ export default function Navbar() {
                       href={item.path}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`block px-6 py-3 text-base font-bold transition-colors hover:bg-white/5 ${
-                        isActive ? 'text-highlight' : 'text-faded'
+                        isActive ? 'text-highlight' : 'text-primary'
                       }`}
                     >
                       {item.name}

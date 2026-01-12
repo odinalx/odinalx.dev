@@ -12,7 +12,13 @@ export default function LoaderWrapper({ children }: { children: React.ReactNode 
   return (
     <>
       {isHomePage && <Loader onLoadComplete={() => setIsLoaded(true)} />}
-      <div style={{ opacity: isHomePage ? (isLoaded ? 1 : 0) : 1, transition: 'opacity 0.3s' }}>
+      <div 
+        style={{ 
+          opacity: isHomePage ? (isLoaded ? 1 : 0) : 1, 
+          transition: 'opacity 0.3s'
+        }}
+        aria-hidden={isHomePage && !isLoaded ? 'true' : undefined}
+      >
         {children}
       </div>
     </>

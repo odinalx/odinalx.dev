@@ -128,13 +128,14 @@ export default function AllProjectsPage() {
   }, []);
 
   return (
-    <main className="text-primary min-h-screen max-w-6xl px-4 md:px-6 lg:px-8 py-12 md:py-20">
+    <main className="text-primary min-h-screen max-w-6xl px-4 md:px-6 lg:px-8 py-12 md:py-20" id="main-content">
       <Link
         ref={backLinkRef}
         href="/"
         className="inline-flex items-center text-highlight hover:text-title transition-colors mb-8 md:mb-12 text-sm md:text-base"
+        aria-label="Back to home page"
       >
-        <ArrowLeft className="mr-2 w-4 h-4 md:w-5 md:h-5" />
+        <ArrowLeft className="mr-2 w-4 h-4 md:w-5 md:h-5" aria-hidden="true" />
         Odin Alexandre
       </Link>
 
@@ -173,7 +174,7 @@ export default function AllProjectsPage() {
                   <div className="font-semibold text-title text-sm md:text-lg">
                     {project.title}
                   </div>
-                  <div className="text-primary text-xs md:text-sm mt-1 max-w-md">
+                  <div className="text-light-faded text-xs md:text-sm mt-1 max-w-md">
                     {project.description}
                   </div>
                 </td>
@@ -195,11 +196,12 @@ export default function AllProjectsPage() {
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center text-highlight hover:text-title transition-colors text-sm md:text-base"
+                      aria-label={`Visit ${project.title} website`}
                     >
-                      <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" />
+                      <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
                     </a>
                   ) : (
-                    <span className="text-faded text-sm">—</span>
+                    <span className="text-primary text-sm" aria-label="No website available">—</span>
                   )}
                 </td>
                 <td className="py-6 px-2 md:px-4">
@@ -209,11 +211,12 @@ export default function AllProjectsPage() {
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center text-highlight hover:text-title transition-colors"
+                      aria-label={`View ${project.title} on GitHub`}
                     >
-                      <Github className="w-5 h-5 md:w-6 md:h-6" />
+                      <Github className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
                     </a>
                   ) : (
-                    <span className="text-faded text-sm">—</span>
+                    <span className="text-primary text-sm" aria-label="No GitHub repository">—</span>
                   )}
                 </td>
               </tr>

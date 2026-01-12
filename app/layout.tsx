@@ -24,6 +24,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased flex flex-col items-center text-primary text-base md:text-lg leading-6 md:leading-7`}
       >
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <LoaderWrapper>
           <Cursor />
           <Navbar />
