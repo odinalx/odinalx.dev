@@ -146,20 +146,20 @@ export default function AllProjectsPage() {
         All Projects
       </h1>
 
-      <div className="overflow-x-auto">
-        <table ref={tableRef} className="w-full border-collapse">
+      <div>
+        <table ref={tableRef} className="w-full border-collapse table-auto">
           <thead>
             <tr className="border-b border-faded">
-              <th className="text-left py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base">
+              <th className="text-left py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base min-w-[200px] md:min-w-[300px]">
                 Project
               </th>
-              <th className="text-left py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base">
+              <th className="text-left py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base min-w-[150px]">
                 Built with
               </th>
-              <th className="text-left py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base">
+              <th className="text-center py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base w-16 md:w-20">
                 Link
               </th>
-              <th className="text-left py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base">
+              <th className="text-center py-4 px-2 md:px-4 text-title font-semibold text-sm md:text-base w-16 md:w-20">
                 GitHub
               </th>
             </tr>
@@ -170,16 +170,16 @@ export default function AllProjectsPage() {
                 key={project.slug}
                 className="border-b border-faded/50 hover:bg-white/5 transition-colors"
               >
-                <td className="py-6 px-2 md:px-4">
+                <td className="py-6 px-2 md:px-4 min-w-[200px] md:min-w-[300px]">
                   <div className="font-semibold text-title text-sm md:text-lg">
                     {project.title}
                   </div>
-                  <div className="text-light-faded text-xs md:text-sm mt-1 max-w-md">
+                  <div className="text-light-faded text-xs md:text-sm mt-1">
                     {project.description}
                   </div>
                 </td>
-                <td className="py-6 px-2 md:px-4">
-                  <div className="flex flex-wrap items-center">
+                <td className="py-6 px-2 md:px-4 min-w-[150px]">
+                  <div className="flex flex-wrap items-center gap-1">
                     {project.techs.map((tech) => (
                       <TechBadge
                         key={tech.name}
@@ -189,7 +189,7 @@ export default function AllProjectsPage() {
                     ))}
                   </div>
                 </td>
-                <td className="py-6 px-2 md:px-4">
+                <td className="py-6 px-2 md:px-4 text-center w-16 md:w-20">
                   {project.href ? (
                     <a
                       href={project.href}
@@ -204,7 +204,7 @@ export default function AllProjectsPage() {
                     <span className="text-primary text-sm" aria-label="No website available">—</span>
                   )}
                 </td>
-                <td className="py-6 px-2 md:px-4">
+                <td className="py-6 px-2 md:px-4 text-center w-16 md:w-20">
                   {project.githubUrl ? (
                     <a
                       href={project.githubUrl}
