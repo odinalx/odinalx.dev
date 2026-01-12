@@ -6,16 +6,16 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto px-4 md:px-6 pb-4">
         {/* Social Icons - Mobile/Tablet Only */}
         <div className="lg:hidden flex justify-center gap-6 mb-6 text-light-faded">
-          <a href="" className="hover:text-highlight transition-colors p-2" aria-label="GitHub">
+          <a href="https://github.com/odinalx" target="_blank" rel="noreferrer" className="hover:text-highlight transition-colors p-2" aria-label="GitHub">
             <Github size={24} />
           </a>
-          <a href="" className="hover:text-highlight transition-colors p-2" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/odinalexandre/" target="_blank" rel="noreferrer" className="hover:text-highlight transition-colors p-2" aria-label="LinkedIn">
             <Linkedin size={24} />
           </a>
-          <a href="" className="hover:text-highlight transition-colors p-2" aria-label="Twitter">
+          <a href="https://x.com/_Odin_Dev" target="_blank" rel="noreferrer" className="hover:text-highlight transition-colors p-2" aria-label="Twitter">
             <Twitter size={24} />
           </a>
-          <a href="" className="hover:text-highlight transition-colors p-2" aria-label="Instagram">
+          <a href="https://www.instagram.com/_odin_dev/" target="_blank" rel="noreferrer" className="hover:text-highlight transition-colors p-2" aria-label="Instagram">
             <Instagram size={24} />
           </a>
         </div>
@@ -27,6 +27,7 @@ export default function Footer() {
             <a
               href="https://www.figma.com/"
               target="_blank"
+              rel="noreferrer"
               className="font-bold text-primary hover:text-title transition-colors"
             >
               Figma
@@ -35,6 +36,7 @@ export default function Footer() {
             <a
               href="https://code.visualstudio.com/"
               target="_blank"
+              rel="noreferrer"
               className="font-bold text-primary hover:text-title transition-colors"
             >
               Visual Studio Code
@@ -43,6 +45,7 @@ export default function Footer() {
             <a
               href="https://nextjs.org/"
               target="_blank"
+              rel="noreferrer"
               className="font-bold text-primary hover:text-title transition-colors"
             >
               Next.js
@@ -51,6 +54,7 @@ export default function Footer() {
             <a
               href="https://tailwindcss.com/"
               target="_blank"
+              rel="noreferrer"
               className="font-bold text-primary hover:text-title transition-colors"
             >
               Tailwind CSS
@@ -59,6 +63,7 @@ export default function Footer() {
             <a
               href="https://vercel.com/"
               target="_blank"
+              rel="noreferrer"
               className="font-bold text-primary hover:text-title transition-colors"
             >
               Vercel

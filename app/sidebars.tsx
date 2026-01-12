@@ -2,22 +2,30 @@
 
 import { Github, Twitter, Linkedin, Instagram, MapPin } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 
 export default function SideBars() {
   const leftBarRef = useRef<HTMLDivElement>(null);
   const rightBarRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Animate left bar (socials) - after navbar finishes
+    // For /work page, start animations immediately (no loader)
+    // For homepage, animate after navbar finishes
     // Loader: 2.2s, Navbar: 2.4s + 0.8s = finishes at 3.2s
+    const isWorkPage = pathname === '/work';
+    const leftDelay = isWorkPage ? 1 : 3.25;
+    const rightDelay = isWorkPage ? 1 : 3.35;
+
+    // Animate left bar (socials)
     if (leftBarRef.current) {
       gsap.from(leftBarRef.current, {
         y: 100,
         opacity: 0,
         duration: 1,
         ease: 'power3.out',
-        delay: 3.25,
+        delay: leftDelay,
       });
     }
 
@@ -28,10 +36,10 @@ export default function SideBars() {
         opacity: 0,
         duration: 1,
         ease: 'power3.out',
-        delay: 3.35,
+        delay: rightDelay,
       });
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -42,22 +50,22 @@ export default function SideBars() {
       >
         <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">
           <li className="p-3">
-            <a href="" className="hover:text-highlight">
+            <a href="https://github.com/odinalx" target="_blank" rel="noreferrer" className="hover:text-highlight">
               <Github size={24} />
             </a>
           </li>
           <li className="p-3">
-            <a href="" className="hover:text-highlight">
+            <a href="https://www.linkedin.com/in/odinalexandre/" target="_blank" rel="noreferrer" className="hover:text-highlight">
               <Linkedin size={24} />
             </a>
           </li>
           <li className="p-3">
-            <a href="" className="hover:text-highlight">
+            <a href="https://x.com/_Odin_Dev" target="_blank" rel="noreferrer" className="hover:text-highlight">
               <Twitter size={24} />
             </a>
           </li>
           <li className="p-3 mb-5">
-            <a href="" className="hover:text-highlight">
+            <a href="https://www.instagram.com/_odin_dev/" target="_blank" rel="noreferrer" className="hover:text-highlight">
               <Instagram size={24} />
             </a>
           </li>

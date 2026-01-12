@@ -3,7 +3,7 @@
 import Experience from './experience';
 import Work from './work';
 import { ArrowUpRight, ArrowRight, ArrowDown } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -58,13 +58,10 @@ function TypewriterText({
 }
 
 // Flip Text Component for TOUCH
-function FlipWord({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+const FlipWord = React.forwardRef<
+  { triggerAnimation: () => void },
+  { children: React.ReactNode; className?: string }
+>(({ children, className }, ref) => {
   const wordRef = useRef<HTMLSpanElement>(null);
   const isAnimatingRef = useRef(false);
 
@@ -91,6 +88,10 @@ function FlipWord({
     }
   };
 
+  React.useImperativeHandle(ref, () => ({
+    triggerAnimation: handleMouseEnter,
+  }));
+
   return (
     <span
       ref={wordRef}
@@ -105,7 +106,9 @@ function FlipWord({
       {children}
     </span>
   );
-}
+});
+
+FlipWord.displayName = 'FlipWord';
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -113,6 +116,7 @@ export default function Home() {
   const expSectionRef = useRef<HTMLElement>(null);
   const workSectionRef = useRef<HTMLElement>(null);
   const contactSectionRef = useRef<HTMLElement>(null);
+  const flipWordRef = useRef<{ triggerAnimation: () => void }>(null);
 
   useEffect(() => {
     // Hero animations - start after sidebars begin
@@ -181,6 +185,7 @@ export default function Home() {
                 start: 'top 80%',
                 end: 'top 50%',
                 toggleActions: 'play none none none',
+                once: true,
               },
             }
           );
@@ -201,6 +206,7 @@ export default function Home() {
                 start: 'top 80%',
                 end: 'top 50%',
                 toggleActions: 'play none none none',
+                once: true,
               },
             }
           );
@@ -224,6 +230,7 @@ export default function Home() {
                 start: 'top 90%',
                 end: 'top 20%',
                 toggleActions: 'play none none none',
+                once: true,
               },
             }
           );
@@ -324,7 +331,7 @@ export default function Home() {
           <div className="section-content space-y-3 mb-24 md:mb-32 lg:mb-48">
             <Work />
             <a
-              href="#"
+              href="/work"
               className="work-cta flex text-title font-bold hover:text-highlight box-content group w-fit text-sm md:text-base"
             >
               View All Works
@@ -350,10 +357,13 @@ export default function Home() {
             </p>
             <ArrowDown className="mb-6 md:mb-8 text-title w-5 h-5 md:w-6 md:h-6" />
             <a
-              href=""
+              href="mailto:odinaledxandre.dev@gmail.com"
               className="font-bold text-2xl md:text-4xl lg:text-5xl text-title px-4"
+              onMouseEnter={() => {
+                flipWordRef.current?.triggerAnimation();
+              }}
             >
-              GET IN <FlipWord className="text-highlight">TOUCH</FlipWord>
+              GET IN <FlipWord ref={flipWordRef} className="text-highlight">TOUCH</FlipWord>
             </a>
           </div>
         </section>

@@ -79,40 +79,69 @@ export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const triggers: ScrollTrigger[] = [];
+
     experienceRef.current.forEach((exp, index) => {
       if (exp) {
-        gsap.from(exp, {
-          scrollTrigger: {
-            trigger: exp,
-            start: 'top 85%',
-            end: 'top 60%',
-            toggleActions: 'play none none none',
+        const trigger = gsap.fromTo(
+          exp,
+          {
+            x: -50,
+            opacity: 0,
           },
-          x: -50,
-          opacity: 0,
-          duration: 0.8,
-          delay: index * 0.15,
-          ease: 'power3.out',
-        });
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: index * 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: exp,
+              start: 'top 85%',
+              end: 'top 60%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          }
+        );
+        if (trigger.scrollTrigger) {
+          triggers.push(trigger.scrollTrigger);
+        }
       }
     });
 
     // Animate the "View Full Résumé" button
     const ctaButton = document.querySelector('.experience-cta');
     if (ctaButton && containerRef.current) {
-      gsap.from(ctaButton, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
+      const trigger = gsap.fromTo(
+        ctaButton,
+        {
+          y: 30,
+          opacity: 0,
         },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        delay: experiences.length * 0.15 + 0.3,
-        ease: 'power2.out',
-      });
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: experiences.length * 0.15 + 0.3,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        }
+      );
+      if (trigger.scrollTrigger) {
+        triggers.push(trigger.scrollTrigger);
+      }
     }
+
+    // Cleanup function
+    return () => {
+      triggers.forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (

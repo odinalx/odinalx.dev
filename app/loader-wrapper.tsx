@@ -1,15 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Loader from './loader';
 
 export default function LoaderWrapper({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   return (
     <>
-      <Loader onLoadComplete={() => setIsLoaded(true)} />
-      <div style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.3s' }}>
+      {isHomePage && <Loader onLoadComplete={() => setIsLoaded(true)} />}
+      <div style={{ opacity: isHomePage ? (isLoaded ? 1 : 0) : 1, transition: 'opacity 0.3s' }}>
         {children}
       </div>
     </>

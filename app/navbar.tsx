@@ -90,6 +90,11 @@ export default function Navbar() {
     };
   }, []);
 
+  // Don't show navbar on /work page
+  if (pathname === '/work') {
+    return null;
+  }
+
   return (
     <header ref={navRef}>
       <nav
