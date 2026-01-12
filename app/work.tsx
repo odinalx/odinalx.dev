@@ -22,44 +22,46 @@ type Project = {
 const projects: Project[] = [
   {
     slug: 'project-1',
-    title: 'Projet 1',
+    title: 'Portfolio V1',
     description:
-      'Creation and maintenance of UI components that power Klaviyo’s frontend, ensuring our platform meets accessibility standards and best practices.',
+      'First iteration of my portfolio, created as part of an academic project.',
     imageSrc: '/test.png',
-    imageAlt: 'Preview project 1',
+    imageAlt: 'Preview Portfolio V1',
     href: '',
-    githubUrl: '',
-    techs: [
-      { name: 'TypeScript', iconSrc: '/typescript.svg' },
-      { name: 'React', iconSrc: '/react.svg' },
-    ],
-  },
-  {
-    slug: 'project-2',
-    title: 'Projet 2',
-    description:
-      'Optimized rendering performance and built a design system with consistent tokens and accessible components.',
-    imageSrc: '/test.png',
-    imageAlt: 'Preview project 2',
-    href: '#',
-    githubUrl: '',
+    githubUrl: 'https://github.com/odinalx/PortfolioV1',
     techs: [
       { name: 'Next.js', iconSrc: '/nextdotjs.svg' },
       { name: 'Tailwind', iconSrc: '/tailwindcss.svg' },
     ],
   },
   {
-    slug: 'project-3',
-    title: 'Projet 3',
+    slug: 'project-2',
+    title: 'SLV App',
     description:
-      'Built a CI-ready app with containers and robust DX, focusing on maintainability and testability.',
+      'Final-year project: development of a management website for an association overseeing around fifteen sports and leisure sections.',
     imageSrc: '/test.png',
-    imageAlt: 'Preview project 3',
-    href: '#',
-    githubUrl: '#',
+    imageAlt: 'Preview SLV App',
+    href: '',
+    githubUrl: 'https://github.com/odinalx/Projet-tutore',
+    techs: [
+      { name: 'Vue.JS', iconSrc: '/vuedotjs.svg' },
+      { name: 'Tailwind', iconSrc: '/tailwindcss.svg' },
+      { name: 'PHP', iconSrc: '/php.svg' },
+    ],
+  },
+  {
+    slug: 'project-3',
+    title: 'SecretSanta',
+    description:
+      'A modern web application for organizing Secret Santa gift exchanges with friends, family, or colleagues.',
+    imageSrc: '/Secret-Santa.png',
+    imageAlt: 'Preview Secret-Santa',
+    href: 'https://secretsanta.lorisalex.com/',
+    githubUrl: 'https://github.com/odinalx/SecretSanta',
     techs: [
       { name: 'Docker', iconSrc: '/docker.svg' },
-      { name: 'TypeScript', iconSrc: '/typescript.svg' },
+      { name: 'Next.js', iconSrc: '/nextdotjs.svg' },
+      { name: 'Tailwind', iconSrc: '/tailwindcss.svg' },
     ],
   },
 ];
@@ -89,7 +91,7 @@ export default function Work() {
               start: 'top 90%',
               end: 'top 70%',
               toggleActions: 'play none none none',
-              once: true, // Animation se joue une seule fois
+              once: true,
             },
           }
         );
@@ -152,6 +154,7 @@ export default function Work() {
           {project.href ? (
             <a
               href={project.href}
+              target="_blank"
               aria-label={`${project.title} website`}
               className="absolute -inset-x-4 -inset-y-4 lg:-inset-x-6 z-20 cursor-pointer"
             />
@@ -181,6 +184,7 @@ export default function Work() {
                 {project.href ? (
                   <a
                     href={project.href}
+                    target="_blank"
                     className="flex items-start text-title transition-colors duration-200 group w-fit pointer-events-none"
                   >
                     <h4 className="group-hover:text-highlight">

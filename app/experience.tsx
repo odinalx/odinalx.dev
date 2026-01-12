@@ -22,7 +22,7 @@ const experiences: ExperienceEntry[] = [
     role: 'Mobile developer',
     year: '2025',
     description:
-      'At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank',
+      '3-month internship as a Front-End Developer, working on the creation of an internal management tool using Flutter Web',
     logoSrc: '/boursobank.png',
     logoAlt: 'BoursoBank logo',
   },
@@ -31,14 +31,14 @@ const experiences: ExperienceEntry[] = [
     role: 'Front-end Developer',
     year: '2024',
     description:
-      'At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank',
+      '2-month internship as a Front-End Developer, focused on UI/UX redesign and SEO optimization.',
   },
   {
     company: 'BUT MMI/Infromatique',
     role: 'Université de Lorraine',
     year: '2022-2025',
     description:
-      'At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank At bourso bank',
+      'Hands-on experience in all key areas of digital professions and web development through real-world, project-based learning',
     logoSrc: '/universite.png',
     logoAlt: 'Université de Lorraine logo',
   },
@@ -61,7 +61,9 @@ function ExperienceItem({ entry }: { entry: ExperienceEntry }) {
           <h4 className="text-title text-xl md:text-2xl lg:text-3xl md:whitespace-nowrap">
             {entry.company}
           </h4>
-          <h5 className="text-sm md:text-base md:whitespace-nowrap">{entry.role}</h5>
+          <h5 className="text-sm md:text-base md:whitespace-nowrap">
+            {entry.role}
+          </h5>
           <p className="text-faded text-sm md:text-base">{entry.year}</p>
         </div>
         <div className="flex-1 min-w-0">

@@ -92,7 +92,9 @@ export default function Navbar() {
 
   return (
     <header ref={navRef}>
-      <nav className={`fixed top-0 left-0 right-0 z-40 pt-4 pb-2 md:py-6 lg:py-4`}>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-40 pt-4 pb-2 md:py-6 lg:py-4`}
+      >
         <div className="max-w-5xl mx-auto px-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex justify-center">
@@ -136,17 +138,21 @@ export default function Navbar() {
               className="text-title p-2 transition-transform duration-300 ease-in-out"
               aria-label="Toggle menu"
             >
-              <div className={`transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
+              <div
+                className={`transition-transform duration-300 ease-in-out ${
+                  mobileMenuOpen ? 'rotate-90' : 'rotate-0'
+                }`}
+              >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </div>
             </button>
           </div>
 
           {/* Mobile Menu Dropdown */}
-          <div 
+          <div
             className={`md:hidden absolute top-full left-4 right-4 mt-1 bg-background/95 backdrop-blur-sm border border-primary rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out origin-top ${
-              mobileMenuOpen 
-                ? 'opacity-100 scale-y-100 translate-y-0' 
+              mobileMenuOpen
+                ? 'opacity-100 scale-y-100 translate-y-0'
                 : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'
             }`}
           >
@@ -160,14 +166,18 @@ export default function Navbar() {
                     ? pathname === item.path
                     : activeSection === targetId;
                 return (
-                  <li 
+                  <li
                     key={item.name}
                     className={`transition-all duration-300 ease-out ${
-                      mobileMenuOpen 
-                        ? 'opacity-100 translate-x-0' 
+                      mobileMenuOpen
+                        ? 'opacity-100 translate-x-0'
                         : 'opacity-0 -translate-x-4'
                     }`}
-                    style={{ transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms' }}
+                    style={{
+                      transitionDelay: mobileMenuOpen
+                        ? `${index * 50}ms`
+                        : '0ms',
+                    }}
                   >
                     <Link
                       href={item.path}
