@@ -244,11 +244,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="text-primary min-h-screen max-w-5xl px-4 md:px-6 lg:px-0" id="main-content">
+    <main className="text-primary min-h-screen max-w-5xl px-4 md:px-6 lg:px-8 xl:px-0" id="main-content">
       <section
         id="home"
         ref={heroRef}
-        className="min-h-screen flex flex-col justify-center"
+        className="min-h-screen flex flex-col justify-center lg:px-4"
       >
         <TypewriterText
           text="Odin Alexandre"

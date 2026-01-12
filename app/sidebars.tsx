@@ -44,11 +44,12 @@ export default function SideBars() {
   return (
     <>
       {/* Left Bar - Social Icons (Hidden on mobile/tablet) */}
-      <div
+      <nav
         ref={leftBarRef}
         className="hidden lg:block fixed bottom-0 left-20 xl:left-40 w-10 text-light-faded"
+        aria-label="Social media links"
       >
-        <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block " role="navigation" aria-label="Social media links">
+        <ul className="flex flex-col items-center after:w-[1px] after:h-[120px] after:bg-light-faded after:block ">
           <li className="p-3">
             <a href="https://github.com/odinalx" target="_blank" rel="noreferrer" className="hover:text-highlight" aria-label="GitHub profile">
               <Github size={24} aria-hidden="true" />
@@ -70,17 +71,17 @@ export default function SideBars() {
             </a>
           </li>
         </ul>
-      </div>
+      </nav>
 
       {/* Right Bar - Based in France (Hidden on mobile/tablet) */}
       <div
         ref={rightBarRef}
-        className="hidden lg:block fixed bottom-0 right-20 xl:right-40 w-10 text-light-faded"
+        className="hidden lg:block fixed bottom-0 right-20 xl:right-40 w-10"
         aria-label="Location information"
       >
         <div className="after:w-[1px] after:h-[120px] after:bg-light-faded after:block flex flex-col items-center">
-          <MapPin size={24} className="rotate-90 mb-4" aria-hidden="true" />
-          <p className="writing-mode-vertical-rl text-center mb-5 font-bold text-sm">
+          <MapPin size={24} className="rotate-90 mb-4 text-light-faded" aria-hidden="true" />
+          <p className="writing-mode-vertical-rl text-center mb-5 font-bold text-sm text-title">
             BASED IN FRANCE
           </p>
         </div>

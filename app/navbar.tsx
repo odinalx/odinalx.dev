@@ -97,16 +97,16 @@ export default function Navbar() {
 
   return (
     <header ref={navRef}>
-      <nav
+      <div
         className={`fixed top-0 left-0 right-0 z-40 pt-4 pb-2 md:py-6 lg:py-4`}
       >
         <div className="max-w-5xl mx-auto px-4">
           {/* Desktop Navigation */}
-          <div className="hidden md:flex justify-center">
-            <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4" role="navigation" aria-label="Main navigation">
+          <nav className="hidden md:flex justify-center" aria-label="Main navigation">
+            <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4">
               <li>
                 <Link href={'/'} aria-label="Home">
-                  <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} />
+                  <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} style={{ width: 'auto', height: 'auto' }} />
                 </Link>
               </li>
               {navItems.map((item) => {
@@ -131,12 +131,12 @@ export default function Navbar() {
                 );
               })}
             </ul>
-          </div>
+          </nav>
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex justify-between items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-3">
             <Link href={'/'} aria-label="Home">
-              <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} />
+              <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} style={{ width: 'auto', height: 'auto' }} />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -154,13 +154,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Dropdown */}
-          <div
+          <nav
             className={`md:hidden absolute top-full left-4 right-4 mt-1 bg-background/95 backdrop-blur-sm border border-primary rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out origin-top ${
               mobileMenuOpen
                 ? 'opacity-100 scale-y-100 translate-y-0'
                 : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'
             }`}
-            role="navigation"
             aria-label="Mobile navigation menu"
           >
             <ul className="flex flex-col py-1">
@@ -199,9 +198,9 @@ export default function Navbar() {
                 );
               })}
             </ul>
-          </div>
+          </nav>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

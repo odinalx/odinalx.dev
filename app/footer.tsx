@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="py-4 md:py-6 text-center">
       <div className="max-w-5xl mx-auto px-4 md:px-6 pb-4">
         {/* Social Icons - Mobile/Tablet Only */}
-        <div className="lg:hidden flex justify-center gap-6 mb-6 text-light-faded" role="navigation" aria-label="Social media links">
+        <nav className="lg:hidden flex justify-center gap-6 mb-6 text-light-faded" aria-label="Social media links">
           <a href="https://github.com/odinalx" target="_blank" rel="noreferrer" className="hover:text-highlight transition-colors p-2" aria-label="GitHub profile">
             <Github size={24} aria-hidden="true" />
           </a>
@@ -18,7 +18,7 @@ export default function Footer() {
           <a href="https://www.instagram.com/_odin_dev/" target="_blank" rel="noreferrer" className="hover:text-highlight transition-colors p-2" aria-label="Instagram profile">
             <Instagram size={24} aria-hidden="true" />
           </a>
-        </div>
+        </nav>
 
         {/* Footer Text */}
         <div className="flex justify-center">

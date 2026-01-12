@@ -165,8 +165,9 @@ export default function Work() {
               alt={project.imageAlt}
               src={project.imageSrc}
               width={250}
-              height={0}
+              height={250}
               className="h-auto w-32 md:w-48 lg:w-[250px] border-2 border-faded rounded-xl mb-0 md:mb-4 transition-colors duration-200 ease-out group-hover:border-light-faded"
+              style={{ width: 'auto', height: 'auto' }}
             />
             {project.githubUrl ? (
               <a
@@ -216,7 +217,7 @@ export default function Work() {
 
 function TechBadge({ name, iconSrc }: { name: string; iconSrc: string }) {
   return (
-    <li className="bg-faded text-title font-bold text-xs md:text-sm px-2 py-1 rounded-full flex items-center">
+    <li className="bg-faded/40 border border-faded text-title font-bold text-xs md:text-sm px-2 py-1 rounded-full flex items-center">
       <span
         aria-hidden="true"
         className="mr-1 inline-block h-[12px] w-[12px] md:h-[14px] md:w-[14px] bg-current [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]"
