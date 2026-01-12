@@ -5,6 +5,7 @@ export default function Cursor() {
   const dotRef = useRef<HTMLDivElement | null>(null);
   const outlineRef = useRef<HTMLDivElement | null>(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const isInitializedRef = useRef(false);
 
   useEffect(() => {
     // Check if device supports touch or is mobile/tablet
@@ -35,6 +36,17 @@ export default function Cursor() {
     const handleMove = (e: MouseEvent) => {
       const posX = e.clientX;
       const posY = e.clientY;
+
+      // Initialize cursor position on first move
+      if (!isInitializedRef.current) {
+        cursorDot.style.opacity = '1';
+        cursorOutline.style.opacity = '1';
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+        cursorOutline.style.left = `${posX}px`;
+        cursorOutline.style.top = `${posY}px`;
+        isInitializedRef.current = true;
+      }
 
       cursorDot.style.left = `${posX}px`;
       cursorDot.style.top = `${posY}px`;
@@ -93,10 +105,12 @@ export default function Cursor() {
       <div
         ref={dotRef}
         className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[5px] h-[5px] bg-cursor z-[9999]"
+        style={{ opacity: 0, transition: 'opacity 0.2s' }}
       ></div>
       <div
         ref={outlineRef}
         className="fixed left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-[50%] pointer-events-none w-[40px] h-[40px] border-2 border-cursor-outline cursor-outline z-[9999]"
+        style={{ opacity: 0, transition: 'opacity 0.2s' }}
       ></div>
     </div>
   );
