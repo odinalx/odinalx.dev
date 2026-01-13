@@ -165,6 +165,33 @@ export default function Home() {
       contactSectionRef,
     ];
 
+    // Check if sections are already visible and show them
+    const checkVisibility = () => {
+      sections.forEach((sectionRef) => {
+        if (sectionRef.current) {
+          const rect = sectionRef.current.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isVisible) {
+            const title = sectionRef.current.querySelector('.section-title');
+            const divider = sectionRef.current.querySelector('.section-divider');
+            const content = sectionRef.current.querySelector('.section-content');
+            
+            if (title) gsap.set(title, { x: 0, opacity: 1 });
+            if (divider) gsap.set(divider, { scaleX: 1, opacity: 1 });
+            
+            const sectionId = sectionRef.current.id;
+            if (content && (sectionId === 'about' || sectionId === 'contact')) {
+              gsap.set(content.children, { y: 0, opacity: 1 });
+            }
+          }
+        }
+      });
+    };
+
+    // Initial check
+    checkVisibility();
+
     sections.forEach((sectionRef) => {
       if (sectionRef.current) {
         const title = sectionRef.current.querySelector('.section-title');
@@ -182,10 +209,10 @@ export default function Home() {
               ease: 'power3.out',
               scrollTrigger: {
                 trigger: sectionRef.current,
-                start: 'top 80%',
-                end: 'top 50%',
+                start: 'top 95%',
                 toggleActions: 'play none none none',
                 once: true,
+                fastScrollEnd: true,
               },
             }
           );
@@ -203,10 +230,10 @@ export default function Home() {
               delay: 0.2,
               scrollTrigger: {
                 trigger: sectionRef.current,
-                start: 'top 80%',
-                end: 'top 50%',
+                start: 'top 95%',
                 toggleActions: 'play none none none',
                 once: true,
+                fastScrollEnd: true,
               },
             }
           );
@@ -227,10 +254,10 @@ export default function Home() {
               ease: 'power2.out',
               scrollTrigger: {
                 trigger: content,
-                start: 'top 90%',
-                end: 'top 20%',
+                start: 'top 95%',
                 toggleActions: 'play none none none',
                 once: true,
+                fastScrollEnd: true,
               },
             }
           );
@@ -238,8 +265,15 @@ export default function Home() {
       }
     });
 
+    // Add scroll listener for fast scrolling
+    const handleScroll = () => {
+      checkVisibility();
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -359,9 +393,9 @@ export default function Home() {
             </p>
             <ArrowDown className="mb-6 md:mb-8 text-title w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
             <a
-              href="mailto:odinaledxandre.dev@gmail.com"
+              href="mailto:odinalexandre.dev@gmail.com"
               className="font-bold text-2xl md:text-4xl lg:text-5xl text-title px-4"
-              aria-label="Send email to odinaledxandre.dev@gmail.com"
+              aria-label="Send email to odinalexandre.dev@gmail.com"
               onMouseEnter={() => {
                 flipWordRef.current?.triggerAnimation();
               }}

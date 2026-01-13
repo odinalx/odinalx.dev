@@ -82,6 +82,31 @@ export default function Experience() {
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
 
+    // Check if elements are already in viewport
+    const checkVisibility = () => {
+      experienceRef.current.forEach((exp) => {
+        if (exp) {
+          const rect = exp.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            gsap.set(exp, { x: 0, opacity: 1 });
+          }
+        }
+      });
+
+      const ctaButton = document.querySelector('.experience-cta');
+      if (ctaButton && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+          gsap.set(ctaButton, { y: 0, opacity: 1 });
+        }
+      }
+    };
+
+    // Initial check
+    checkVisibility();
+
     experienceRef.current.forEach((exp, index) => {
       if (exp) {
         const trigger = gsap.fromTo(
@@ -98,10 +123,10 @@ export default function Experience() {
             ease: 'power3.out',
             scrollTrigger: {
               trigger: exp,
-              start: 'top 85%',
-              end: 'top 60%',
+              start: 'top 95%',
               toggleActions: 'play none none none',
               once: true,
+              fastScrollEnd: true,
             },
           }
         );
@@ -128,9 +153,10 @@ export default function Experience() {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: containerRef.current,
-            start: 'top 80%',
+            start: 'top 95%',
             toggleActions: 'play none none none',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -139,9 +165,16 @@ export default function Experience() {
       }
     }
 
+    // Add scroll listener for fast scrolling
+    const handleScroll = () => {
+      checkVisibility();
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     // Cleanup function
     return () => {
       triggers.forEach((trigger) => trigger.kill());
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

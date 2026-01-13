@@ -106,7 +106,7 @@ export default function Navbar() {
             <ul className="flex space-x-4 items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-4">
               <li>
                 <Link href={'/'} aria-label="Home">
-                  <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} style={{ width: 'auto', height: 'auto' }} />
+                  <Image src="/logo.svg" alt="Odin Alexandre Logo" width={28} height={28} className="w-6 h-6 md:w-7 md:h-7" priority />
                 </Link>
               </li>
               {navItems.map((item) => {
@@ -136,7 +136,7 @@ export default function Navbar() {
           {/* Mobile Navigation */}
           <div className="md:hidden flex justify-between items-center bg-background/80 backdrop-blur-sm border border-primary rounded-full px-4 py-3">
             <Link href={'/'} aria-label="Home">
-              <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} style={{ width: 'auto', height: 'auto' }} />
+              <Image src="/logo.svg" alt="Odin Alexandre Logo" width={24} height={24} className="w-6 h-6" priority />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

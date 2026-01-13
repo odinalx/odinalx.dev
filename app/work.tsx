@@ -73,6 +73,31 @@ export default function Work() {
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
 
+    // Check if elements are already visible
+    const checkVisibility = () => {
+      projectsRef.current.forEach((project) => {
+        if (project) {
+          const rect = project.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            gsap.set(project, { y: 0, opacity: 1 });
+          }
+        }
+      });
+
+      const ctaButton = document.querySelector('.work-cta');
+      if (ctaButton) {
+        const rect = ctaButton.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+          gsap.set(ctaButton, { y: 0, opacity: 1 });
+        }
+      }
+    };
+
+    // Initial check
+    checkVisibility();
+
     projectsRef.current.forEach((project, index) => {
       if (project) {
         const trigger = gsap.fromTo(
@@ -88,10 +113,10 @@ export default function Work() {
             ease: 'power2.out',
             scrollTrigger: {
               trigger: project,
-              start: 'top 90%',
-              end: 'top 70%',
+              start: 'top 95%',
               toggleActions: 'play none none none',
               once: true,
+              fastScrollEnd: true,
             },
           }
         );
@@ -120,6 +145,7 @@ export default function Work() {
             start: 'top 95%',
             toggleActions: 'play none none none',
             once: true,
+            fastScrollEnd: true,
           },
         }
       );
@@ -128,9 +154,16 @@ export default function Work() {
       }
     }
 
+    // Add scroll listener for fast scrolling
+    const handleScroll = () => {
+      checkVisibility();
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     // Cleanup function
     return () => {
       triggers.forEach((trigger) => trigger.kill());
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
