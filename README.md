@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) portfolio.
+This is a [Next.js](https://nextjs.org) portfolio Designed and Developed by Odin ALEXANDRE.
 
 ## Getting Started
 
