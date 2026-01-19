@@ -34,7 +34,7 @@ const experiences: ExperienceEntry[] = [
       '2-month internship as a Front-End Developer, focused on UI/UX redesign and SEO optimization.',
   },
   {
-    company: 'BUT MMI/Infromatique',
+    company: 'BUT MMI/Informatique',
     role: 'Université de Lorraine',
     year: '2022-2025',
     description:

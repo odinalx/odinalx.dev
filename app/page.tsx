@@ -165,115 +165,83 @@ export default function Home() {
       contactSectionRef,
     ];
 
-    // Check if sections are already visible and show them
-    const checkVisibility = () => {
-      sections.forEach((sectionRef) => {
-        if (sectionRef.current) {
-          const rect = sectionRef.current.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          
-          if (isVisible) {
-            const title = sectionRef.current.querySelector('.section-title');
-            const divider = sectionRef.current.querySelector('.section-divider');
-            const content = sectionRef.current.querySelector('.section-content');
-            
-            if (title) gsap.set(title, { x: 0, opacity: 1 });
-            if (divider) gsap.set(divider, { scaleX: 1, opacity: 1 });
-            
-            const sectionId = sectionRef.current.id;
-            if (content && (sectionId === 'about' || sectionId === 'contact')) {
-              gsap.set(content.children, { y: 0, opacity: 1 });
-            }
-          }
-        }
-      });
-    };
-
-    // Initial check
-    checkVisibility();
+    const triggers: ScrollTrigger[] = [];
 
     sections.forEach((sectionRef) => {
       if (sectionRef.current) {
         const title = sectionRef.current.querySelector('.section-title');
         const divider = sectionRef.current.querySelector('.section-divider');
         const content = sectionRef.current.querySelector('.section-content');
+        const sectionId = sectionRef.current.id;
 
         if (title) {
-          gsap.fromTo(
-            title,
-            { x: -50, opacity: 0 },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 95%',
-                toggleActions: 'play none none none',
-                once: true,
-                fastScrollEnd: true,
-              },
-            }
-          );
+          // Set initial state
+          gsap.set(title, { x: -50, opacity: 0 });
+          
+          const trigger = ScrollTrigger.create({
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+              gsap.to(title, {
+                x: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+              });
+            },
+          });
+          triggers.push(trigger);
         }
 
         if (divider) {
-          gsap.fromTo(
-            divider,
-            { scaleX: 0, opacity: 0 },
-            {
-              scaleX: 1,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power3.out',
-              delay: 0.2,
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 95%',
-                toggleActions: 'play none none none',
-                once: true,
-                fastScrollEnd: true,
-              },
-            }
-          );
+          // Set initial state
+          gsap.set(divider, { scaleX: 0, opacity: 0 });
+          
+          const trigger = ScrollTrigger.create({
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+              gsap.to(divider, {
+                scaleX: 1,
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+                delay: 0.2,
+              });
+            },
+          });
+          triggers.push(trigger);
         }
 
         // Only animate content children for About and Contact sections
         // Work and Experience handle their own animations
-        const sectionId = sectionRef.current.id;
         if (content && (sectionId === 'about' || sectionId === 'contact')) {
-          gsap.fromTo(
-            content.children,
-            { y: 30, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.15,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: content,
-                start: 'top 95%',
-                toggleActions: 'play none none none',
-                once: true,
-                fastScrollEnd: true,
-              },
-            }
-          );
+          // Set initial state for all children
+          gsap.set(content.children, { y: 30, opacity: 0 });
+          
+          const trigger = ScrollTrigger.create({
+            trigger: content,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+              gsap.to(content.children, {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                stagger: 0.15,
+                ease: 'power2.out',
+              });
+            },
+          });
+          triggers.push(trigger);
         }
       }
     });
 
-    // Add scroll listener for fast scrolling
-    const handleScroll = () => {
-      checkVisibility();
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      window.removeEventListener('scroll', handleScroll);
+      triggers.forEach((trigger) => trigger.kill());
     };
   }, []);
 

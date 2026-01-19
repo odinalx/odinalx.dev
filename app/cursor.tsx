@@ -4,17 +4,26 @@ import { useEffect, useRef, useState } from 'react';
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement | null>(null);
   const outlineRef = useRef<HTMLDivElement | null>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(true); // Start as true to prevent flash
   const isInitializedRef = useRef(false);
 
   useEffect(() => {
     // Check if device supports touch or is mobile/tablet
     const checkTouchDevice = () => {
-      setIsTouchDevice(
+      const isTouch = 
         'ontouchstart' in window ||
         navigator.maxTouchPoints > 0 ||
-        window.innerWidth < 1024
-      );
+        window.innerWidth < 1024;
+      
+      setIsTouchDevice(isTouch);
+      
+      // Reset initialization when switching back to desktop
+      if (!isTouch && isInitializedRef.current === false) {
+        // Will be initialized on next mouse move
+      } else if (isTouch) {
+        // Reset so cursor re-initializes when coming back to desktop
+        isInitializedRef.current = false;
+      }
     };
 
     checkTouchDevice();
@@ -37,7 +46,7 @@ export default function Cursor() {
       const posX = e.clientX;
       const posY = e.clientY;
 
-      // Initialize cursor position on first move
+      // Initialize cursor position on first move (or after returning from mobile)
       if (!isInitializedRef.current) {
         cursorDot.style.opacity = '1';
         cursorOutline.style.opacity = '1';
