@@ -2,11 +2,6 @@
 
 import Image from 'next/image';
 import { Github, ArrowUpRight } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 type Project = {
   slug: string;
@@ -67,118 +62,14 @@ const projects: Project[] = [
 ];
 
 export default function Work() {
-  const projectsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const triggers: ScrollTrigger[] = [];
-
-    // Check if elements are already visible
-    const checkVisibility = () => {
-      projectsRef.current.forEach((project) => {
-        if (project) {
-          const rect = project.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (isVisible) {
-            gsap.set(project, { y: 0, opacity: 1 });
-          }
-        }
-      });
-
-      const ctaButton = document.querySelector('.work-cta');
-      if (ctaButton) {
-        const rect = ctaButton.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        if (isVisible) {
-          gsap.set(ctaButton, { y: 0, opacity: 1 });
-        }
-      }
-    };
-
-    // Initial check
-    checkVisibility();
-
-    projectsRef.current.forEach((project, index) => {
-      if (project) {
-        const trigger = gsap.fromTo(
-          project,
-          {
-            y: 50,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: project,
-              start: 'top 95%',
-              toggleActions: 'play none none none',
-              once: true,
-              fastScrollEnd: true,
-            },
-          }
-        );
-        if (trigger.scrollTrigger) {
-          triggers.push(trigger.scrollTrigger);
-        }
-      }
-    });
-
-    // Animate the "View All Works" button
-    const ctaButton = document.querySelector('.work-cta');
-    if (ctaButton && containerRef.current) {
-      const trigger = gsap.fromTo(
-        ctaButton,
-        {
-          y: 30,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: ctaButton,
-            start: 'top 95%',
-            toggleActions: 'play none none none',
-            once: true,
-            fastScrollEnd: true,
-          },
-        }
-      );
-      if (trigger.scrollTrigger) {
-        triggers.push(trigger.scrollTrigger);
-      }
-    }
-
-    // Add scroll listener for fast scrolling
-    const handleScroll = () => {
-      checkVisibility();
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Cleanup function
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <div ref={containerRef} className="space-y-8 mb-16 group/list">
-      {projects.map((project, index) => (
+    <div className="space-y-8 mb-16 group/list">
+      {projects.map((project) => (
         <div
           key={project.slug}
-          ref={(el) => {
-            projectsRef.current[index] = el;
-          }}
           className={`group relative flex flex-col md:flex-row pb-1 transition-all lg:group-hover/list:opacity-50 lg:hover:!opacity-100 ${
             project.href ? 'cursor-pointer' : 'cursor-none'
           }`}
-          style={{ willChange: 'transform, opacity' }}
         >
           <div
             className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-white/10 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg pointer-events-none"

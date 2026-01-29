@@ -1,11 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 type ExperienceEntry = {
   company: string;
@@ -76,117 +71,10 @@ function ExperienceItem({ entry }: { entry: ExperienceEntry }) {
 }
 
 export default function Experience() {
-  const experienceRef = useRef<(HTMLDivElement | null)[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const triggers: ScrollTrigger[] = [];
-
-    // Check if elements are already in viewport
-    const checkVisibility = () => {
-      experienceRef.current.forEach((exp) => {
-        if (exp) {
-          const rect = exp.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (isVisible) {
-            gsap.set(exp, { x: 0, opacity: 1 });
-          }
-        }
-      });
-
-      const ctaButton = document.querySelector('.experience-cta');
-      if (ctaButton && containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        if (isVisible) {
-          gsap.set(ctaButton, { y: 0, opacity: 1 });
-        }
-      }
-    };
-
-    // Initial check
-    checkVisibility();
-
-    experienceRef.current.forEach((exp, index) => {
-      if (exp) {
-        const trigger = gsap.fromTo(
-          exp,
-          {
-            x: -50,
-            opacity: 0,
-          },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.8,
-            delay: index * 0.15,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: exp,
-              start: 'top 95%',
-              toggleActions: 'play none none none',
-              once: true,
-              fastScrollEnd: true,
-            },
-          }
-        );
-        if (trigger.scrollTrigger) {
-          triggers.push(trigger.scrollTrigger);
-        }
-      }
-    });
-
-    // Animate the "View Full Résumé" button
-    const ctaButton = document.querySelector('.experience-cta');
-    if (ctaButton && containerRef.current) {
-      const trigger = gsap.fromTo(
-        ctaButton,
-        {
-          y: 30,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          delay: experiences.length * 0.15 + 0.3,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 95%',
-            toggleActions: 'play none none none',
-            once: true,
-            fastScrollEnd: true,
-          },
-        }
-      );
-      if (trigger.scrollTrigger) {
-        triggers.push(trigger.scrollTrigger);
-      }
-    }
-
-    // Add scroll listener for fast scrolling
-    const handleScroll = () => {
-      checkVisibility();
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Cleanup function
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <div ref={containerRef} className="space-y-8 mb-16">
+    <div className="space-y-8 mb-16">
       {experiences.map((entry, index) => (
-        <div
-          key={`${entry.company}-${index}`}
-          ref={(el) => {
-            experienceRef.current[index] = el;
-          }}
-        >
+        <div key={`${entry.company}-${index}`}>
           <ExperienceItem entry={entry} />
         </div>
       ))}

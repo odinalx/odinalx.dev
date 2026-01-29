@@ -113,9 +113,6 @@ FlipWord.displayName = 'FlipWord';
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutSectionRef = useRef<HTMLElement>(null);
-  const expSectionRef = useRef<HTMLElement>(null);
-  const workSectionRef = useRef<HTMLElement>(null);
-  const contactSectionRef = useRef<HTMLElement>(null);
   const flipWordRef = useRef<{ triggerAnimation: () => void }>(null);
 
   useEffect(() => {
@@ -157,88 +154,73 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Section title animations
-    const sections = [
-      aboutSectionRef,
-      expSectionRef,
-      workSectionRef,
-      contactSectionRef,
-    ];
-
+    // Section title animations - only for About section
     const triggers: ScrollTrigger[] = [];
 
-    sections.forEach((sectionRef) => {
-      if (sectionRef.current) {
-        const title = sectionRef.current.querySelector('.section-title');
-        const divider = sectionRef.current.querySelector('.section-divider');
-        const content = sectionRef.current.querySelector('.section-content');
-        const sectionId = sectionRef.current.id;
+    if (aboutSectionRef.current) {
+      const title = aboutSectionRef.current.querySelector('.section-title');
+      const divider = aboutSectionRef.current.querySelector('.section-divider');
+      const content = aboutSectionRef.current.querySelector('.section-content');
 
-        if (title) {
-          // Set initial state
-          gsap.set(title, { x: -50, opacity: 0 });
-          
-          const trigger = ScrollTrigger.create({
-            trigger: sectionRef.current,
-            start: 'top 85%',
-            once: true,
-            onEnter: () => {
-              gsap.to(title, {
-                x: 0,
-                opacity: 1,
-                duration: 0.8,
-                ease: 'power3.out',
-              });
-            },
-          });
-          triggers.push(trigger);
-        }
+      if (title) {
+        gsap.set(title, { x: -50, opacity: 0 });
 
-        if (divider) {
-          // Set initial state
-          gsap.set(divider, { scaleX: 0, opacity: 0 });
-          
-          const trigger = ScrollTrigger.create({
-            trigger: sectionRef.current,
-            start: 'top 85%',
-            once: true,
-            onEnter: () => {
-              gsap.to(divider, {
-                scaleX: 1,
-                opacity: 1,
-                duration: 0.8,
-                ease: 'power3.out',
-                delay: 0.2,
-              });
-            },
-          });
-          triggers.push(trigger);
-        }
-
-        // Only animate content children for About and Contact sections
-        // Work and Experience handle their own animations
-        if (content && (sectionId === 'about' || sectionId === 'contact')) {
-          // Set initial state for all children
-          gsap.set(content.children, { y: 30, opacity: 0 });
-          
-          const trigger = ScrollTrigger.create({
-            trigger: content,
-            start: 'top 85%',
-            once: true,
-            onEnter: () => {
-              gsap.to(content.children, {
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                stagger: 0.15,
-                ease: 'power2.out',
-              });
-            },
-          });
-          triggers.push(trigger);
-        }
+        const trigger = ScrollTrigger.create({
+          trigger: aboutSectionRef.current,
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.to(title, {
+              x: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+            });
+          },
+        });
+        triggers.push(trigger);
       }
-    });
+
+      if (divider) {
+        gsap.set(divider, { scaleX: 0, opacity: 0 });
+
+        const trigger = ScrollTrigger.create({
+          trigger: aboutSectionRef.current,
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.to(divider, {
+              scaleX: 1,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+              delay: 0.2,
+            });
+          },
+        });
+        triggers.push(trigger);
+      }
+
+      if (content) {
+        gsap.set(content.children, { y: 30, opacity: 0 });
+
+        const trigger = ScrollTrigger.create({
+          trigger: content,
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.to(content.children, {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.15,
+              ease: 'power2.out',
+            });
+          },
+        });
+        triggers.push(trigger);
+      }
+    }
 
     return () => {
       triggers.forEach((trigger) => trigger.kill());
@@ -301,11 +283,7 @@ export default function Home() {
             </p>
           </div>
         </section>
-        <section
-          id="experience"
-          ref={expSectionRef}
-          className=" flex flex-col "
-        >
+        <section id="experience" className=" flex flex-col ">
           <div className="flex items-center mb-8 md:mb-12">
             <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>Experience
@@ -324,7 +302,7 @@ export default function Home() {
             </a>
           </div>
         </section>
-        <section id="work" ref={workSectionRef} className=" flex flex-col ">
+        <section id="work" className=" flex flex-col ">
           <div className="flex items-center mb-8 md:mb-12">
             <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>Work
@@ -343,11 +321,7 @@ export default function Home() {
             </a>
           </div>
         </section>
-        <section
-          id="contact"
-          ref={contactSectionRef}
-          className=" flex flex-col "
-        >
+        <section id="contact" className=" flex flex-col ">
           <div className="flex items-center mb-8 md:mb-12">
             <h3 className="section-title text-title text-3xl md:text-5xl lg:text-6xl font-bold whitespace-nowrap">
               <span className="text-highlight">&gt;</span>Contact
